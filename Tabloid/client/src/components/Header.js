@@ -35,27 +35,30 @@ export default function Header() {
               <>
                 <NavItem>
                   <a aria-current="page" className="nav-link"
-                    style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                    style={{ cursor: "pointer" }} onClick={logout} to="/login">Logout</a>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
                 </NavItem>
               </>
             }
             {!isLoggedIn &&
               <>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
-                </NavItem>
+
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/login">Login</NavLink>
                 </NavItem>
-                <NavItem>
+
+                < NavItem >
                   <NavLink tag={RRNavLink} to="/register">Register</NavLink>
                 </NavItem>
+
 
               </>
             }
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+    </div >
   );
 }

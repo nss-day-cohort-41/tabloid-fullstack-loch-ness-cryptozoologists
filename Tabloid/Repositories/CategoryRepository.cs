@@ -21,7 +21,7 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, [Name] FROM Category;";
+                    cmd.CommandText = "SELECT Id, [Name] FROM Category ORDER BY [Name] ASC ";
                     var reader = cmd.ExecuteReader();
                     var categories = new List<Category>();
                     while (reader.Read())

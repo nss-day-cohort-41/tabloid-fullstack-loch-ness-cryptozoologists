@@ -10,10 +10,12 @@ function App() {
   return (
     <Router>
       <UserProfileProvider>
-        <Header />
-        <ApplicationViews />
+        <CategoryProvider>
+          <Header />
+          <ApplicationViews />
+        </CategoryProvider>
       </UserProfileProvider>
-    </Router>
+    </Router >
   );
 }
 

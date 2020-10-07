@@ -26,9 +26,9 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/categories">
-          <CategoryProvider>
-            <CategoryList />
-          </CategoryProvider>
+
+          <CategoryList />
+
         </Route>
       </Switch>
     </main>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { CategoryContext } from "../providers/CategoryProvider";
-
+import { ListGroup, ListGroupItem } from "reactstrap";
 const CategoryList = () => {
     const { categories, getAllCategories } = useContext(CategoryContext);
 
@@ -10,11 +10,14 @@ const CategoryList = () => {
 
     return (
         <div>
+            <h1>Categories</h1>
             {categories.map((category) => (
+
                 <div key={category.id}>
-                    <p>
-                        <strong>{category.name}</strong>
-                    </p>
+                    <ListGroup>
+                        <ListGroupItem>{category.name}</ListGroupItem>
+                    </ListGroup>
+
                 </div>
             ))}
         </div>
