@@ -4,6 +4,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
+import Posts from "./Posts";
 import Tags from "./Tags";
 
 export default function ApplicationViews() {
@@ -16,7 +17,11 @@ export default function ApplicationViews() {
           {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/" exact>
+        <Route path="/posts" exact>
+          {isLoggedIn ? <Posts /> : <Redirect to="/posts" />}
+        </Route>
+
+        <Route path="/tags" exact>
           {isLoggedIn ? <Tags /> : <Redirect to="/tags" />}
         </Route>
 

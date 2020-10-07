@@ -1,130 +1,47 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.VisualBasic;
-using System;
-using System.Security.Claims;
-using Tabloid.Models;
-//using Tabloid.Models.ViewModels;
-using Tabloid.Repositories;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tabloid.Controllers
 {
-    [Authorize]
-    public class TagController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TagController : ControllerBase
     {
-        private readonly ITagRepository _tagRepository;
-        private readonly IPostRepository _postRepository;
-
-        public TagController(ITagRepository tagRepository, IPostRepository postRepository)
+        // GET: api/<TagController>
+        [HttpGet]
+        public IEnumerable<string> Get()
         {
-            _tagRepository = tagRepository;
-            _postRepository = postRepository;
+            return new string[] { "value1", "value2" };
         }
 
-        public IActionResult Index()
+        // GET api/<TagController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
         {
-            var tags = _tagRepository.GetAllTags();
-            return View(tags);
+            return "value";
         }
 
-        public ActionResult Delete(int id)
-        {
-            Tag tag = _tagRepository.GetTagById(id);
-            return View(tag);
-        }
-
-        // POST: Tag/Delete/5
+        // POST api/<TagController>
         [HttpPost]
-        public ActionResult Delete(int id, Tag tag)
+        public void Post([FromBody] string value)
         {
-            try
-            {
-                _tagRepository.Delete(id);
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View(tag);
-            }
         }
 
-
-        public IActionResult Create()
+        // PUT api/<TagController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
         {
-            return View();
         }
 
-        [HttpPost]
-        public IActionResult Create(Tag tag)
+        // DELETE api/<TagController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            try
-            {
-                _tagRepository.AddTag(tag);
-                return RedirectToAction("Index");
-            }
-
-            catch (Exception ex)
-            {
-                return View(tag);
-            }
         }
-
-        public IActionResult Edit(int id)
-        {
-            Tag tag = _tagRepository.GetTagById(id);
-
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            return View(tag);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Tag tag)
-        {
-            try
-            {
-                _tagRepository.Edit(tag);
-
-                return RedirectToAction("Index");
-            }
-
-            catch (Exception ex)
-            {
-                return View(tag);
-            }
-        }
-
-
-        /*[HttpPost]
-        public IActionResult Create(TagCreateViewModel vm)
-        {
-            try
-            {
-                vm.Tag.CreateDateTime = DateAndTime.Now;
-                vm.Tag.IsApproved = true;
-                vm.Tag.UserProfileId = GetCurrentUserProfileId();
-
-                _tagRepository.Add(vm.Tag);
-
-                return RedirectToAction("Details", new { id = vm.Tag.Id });
-            }
-            catch
-            {
-                vm.CategoryOptions = _categoryRepository.GetAll();
-                return View(vm);
-            }
-        }*/
-
-        /*private int GetCurrentUserProfileId()
-        {
-            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return int.Parse(id);
-        }*/
     }
 }
