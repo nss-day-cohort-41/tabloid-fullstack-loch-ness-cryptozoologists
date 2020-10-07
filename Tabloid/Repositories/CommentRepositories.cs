@@ -5,17 +5,49 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TabloidMVC.Models;
+using Tabloid.Repositories;
+using Tabloid.Utils;
+using Tabloid.Models;
 
 
-namespace TabloidMVC.Repositories
+namespace Tabloid.Repositories
 {
     public class CommentRepository : BaseRepository, ICommentRepository
     {
-        public CommentRepository(IConfiguration config) : base(config) { }
+        public CommentRepository(IConfiguration configuration)  : base(configuration) { }
 
-        // this is getting the comments by postId. meaning it will show all comments tied to the post in which they are commenting on 
-        public List<Comment> GetCommentsByPostId(int id)
+        public List<Comment> GetAll()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, Subject, Content, CreateDateTime, PostId, UserProfileId From Comment ORDER BY CreateDateTime";
+                    var reader = cmd.ExecuteReader();
+
+                    var comments = new List<Comment>();
+                    while (reader.Read())
+                    {
+                        comments.Add(new Comment()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Subject = DbUtils.GetString(reader, "Subject"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            PostId = DbUtils.GetInt(reader, "PostId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+                    reader.Close();
+                    return comments;
+                }
+            }
+        }
+        
+
+    // this is getting the comments by postId. meaning it will show all comments tied to the post in which they are commenting on 
+    public List<Comment> GetCommentsByPostId(int id)
         {
             using (var conn = Connection)
             {
@@ -25,10 +57,10 @@ namespace TabloidMVC.Repositories
                     cmd.CommandText = @"
                          SELECT Id, Subject, Content, CreateDateTime, PostId, UserProfileId
                           FROM Comment 
-                          WHERE PostId = @postId
+                          WHERE PostId = @PostId
                           ORDER BY CreateDateTime DESC
                                                   ";
-                    cmd.Parameters.AddWithValue("@postId", id);
+                    cmd.Parameters.AddWithValue("@PostId", id);
                     var reader = cmd.ExecuteReader();
                     var comments = new List<Comment>();
 
@@ -37,12 +69,12 @@ namespace TabloidMVC.Repositories
 
                         comments.Add(new Comment()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Subject = reader.GetString(reader.GetOrdinal("Subject")),
-                            Content = reader.GetString(reader.GetOrdinal("Content")),
-                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
-                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId"))
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Subject = DbUtils.GetString(reader, "Subject"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            PostId = DbUtils.GetInt(reader, "PostId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
 
                         });
 
@@ -71,12 +103,12 @@ namespace TabloidMVC.Repositories
                     {
                         Comment comment = new Comment()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Subject = reader.GetString(reader.GetOrdinal("Subject")),
-                            Content = reader.GetString(reader.GetOrdinal("Content")),
-                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
-                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId"))
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Subject = DbUtils.GetString(reader, "subject"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            PostId = DbUtils.GetInt(reader, "PostId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         };
                         comments.Add(comment);
 
@@ -105,12 +137,12 @@ namespace TabloidMVC.Repositories
                     {
                         Comment comment = new Comment()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Subject = reader.GetString(reader.GetOrdinal("Subject")),
-                            Content = reader.GetString(reader.GetOrdinal("Content")),
-                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
-                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId"))
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Subject = DbUtils.GetString(reader, "subject"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            PostId = DbUtils.GetInt(reader, "PostId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         };
                         reader.Close();
                         return comment;
@@ -134,11 +166,11 @@ namespace TabloidMVC.Repositories
 
                              OUTPUT INSERTED.ID
                               VALUES (@Subject, @Content)";
-                    cmd.Parameters.AddWithValue("@PostId", comment.PostId);
-                    cmd.Parameters.AddWithValue("@UserProfileId", comment.UserProfileId);
-                    cmd.Parameters.AddWithValue("@Subject", comment.Subject);
-                    cmd.Parameters.AddWithValue("@Content", comment.Content);
-                    cmd.Parameters.AddWithValue("@CreateDateTime", comment.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@PostId", comment.PostId);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", comment.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Subject", comment.Subject);
+                    DbUtils.AddParameter(cmd, "@Content", comment.Content);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", comment.CreateDateTime);
                     int id = (int)cmd.ExecuteScalar();
 
                     comment.Id = id;
@@ -158,10 +190,10 @@ namespace TabloidMVC.Repositories
                                           Subject = @Subject
                                           Content = @Content
                                           Where Id = @id ";
-                    cmd.Parameters.AddWithValue("@UserProfileId", comment.UserProfileId);
-                    cmd.Parameters.AddWithValue("@Subject", comment.Subject);
-                    cmd.Parameters.AddWithValue("@Content", comment.Content);
-                    cmd.Parameters.AddWithValue("@id", comment.Id);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", comment.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Subject", comment.Subject);
+                    DbUtils.AddParameter(cmd, "@Content", comment.Content);
+                    DbUtils.AddParameter(cmd, "@id", comment.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -178,8 +210,7 @@ namespace TabloidMVC.Repositories
                     cmd.CommandText = @"
                                       Delete FROM Comment
                                       WHERE Id = @id";
-
-                    cmd.Parameters.AddWithValue("@id", id);
+                    DbUtils.AddParameter(cmd, "@id", id);
 
                     cmd.ExecuteNonQuery();
                 }
