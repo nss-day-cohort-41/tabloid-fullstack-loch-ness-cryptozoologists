@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
+
 export const PostContext = React.createContext();
 
 export const PostProvider = (props) => {
@@ -17,6 +18,16 @@ export const PostProvider = (props) => {
             }).then(resp => resp.json())
                 .then(setPosts));
 
+    const getPost = (id) =>
+        getToken().then((token) =>
+            fetch('/api/post/${id}', {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(res => res.json())
+        )
+
 
     const addPost = (post) => {
         return fetch("/api/post", {
@@ -26,10 +37,6 @@ export const PostProvider = (props) => {
             },
             body: JSON.stringify(post),
         });
-    };
-
-    const getPost = (id) => {
-        return fetch(`/api/post/${id}`).then((res) => res.json());
     };
 
     return (
