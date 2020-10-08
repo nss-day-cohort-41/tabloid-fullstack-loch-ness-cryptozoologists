@@ -2,46 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tabloid.Models;
+using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tabloid.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TagController : ControllerBase
     {
-        // GET: api/<TagController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ITagRepository _tagRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
+
+        public TagController(ITagRepository tagRepository, IUserProfileRepository userProfileRepository)
         {
-            return new string[] { "value1", "value2" };
+            _tagRepository = tagRepository;
+            _userProfileRepository = userProfileRepository;
+        }
+        /* SET UP ABOVE */
+
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_tagRepository.GetAll());
         }
 
-        // GET api/<TagController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var tag = _tagRepository.GetById(id);
+            if (tag != null)
+            {
+                NotFound();
+            }
+            return Ok(tag);
         }
 
         // POST api/<TagController>
-        [HttpPost]
+        /*[HttpPost]
         public void Post([FromBody] string value)
         {
-        }
+        }*/
 
         // PUT api/<TagController>/5
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
-        }
+        }*/
 
         // DELETE api/<TagController>/5
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+        }*/
     }
 }

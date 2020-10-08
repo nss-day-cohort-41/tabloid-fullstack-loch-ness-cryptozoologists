@@ -24,13 +24,13 @@ namespace Tabloid.Controllers
 
         public IActionResult Index()
         {
-            var tags = _tagRepository.GetAllTags();
+            var tags = _tagRepository.GetAll();
             return View(tags);
         }
 
         public ActionResult Delete(int id)
         {
-            Tag tag = _tagRepository.GetTagById(id);
+            Tag tag = _tagRepository.GetById(id);
             return View(tag);
         }
 
@@ -73,7 +73,7 @@ namespace Tabloid.Controllers
 
         public IActionResult Edit(int id)
         {
-            Tag tag = _tagRepository.GetTagById(id);
+            Tag tag = _tagRepository.GetById(id);
 
             if (tag == null)
             {

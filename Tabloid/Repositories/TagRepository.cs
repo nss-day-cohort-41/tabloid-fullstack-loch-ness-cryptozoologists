@@ -8,7 +8,7 @@ namespace Tabloid.Repositories
     public class TagRepository : BaseRepository, ITagRepository
     {
         public TagRepository(IConfiguration config) : base(config) { }
-        public List<Tag> GetAllTags()
+        public List<Tag> GetAll()
         {
             using (var conn = Connection)
             {
@@ -36,7 +36,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public Tag GetTagById(int tagId)
+        public Tag GetById(int tagId)
         {
             using (SqlConnection conn = Connection)
             {
