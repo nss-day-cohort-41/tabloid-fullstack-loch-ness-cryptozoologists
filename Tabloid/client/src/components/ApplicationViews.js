@@ -4,6 +4,8 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
+import CategoryList from "./CategoryList";
+import { CategoryProvider } from "../providers/CategoryProvider";
 import PostList from "./PostList";
 
 export default function ApplicationViews() {
@@ -28,6 +30,12 @@ export default function ApplicationViews() {
 
         <Route path="/register">
           <Register />
+        </Route>
+
+        <Route path="/categories">
+
+          <CategoryList />
+
         </Route>
       </Switch>
     </main >
