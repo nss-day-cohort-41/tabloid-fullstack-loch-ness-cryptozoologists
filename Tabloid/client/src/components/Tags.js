@@ -10,7 +10,10 @@ const Tags = () => {
 
     return (
         <div>
-            <h1>Tags</h1>
+            <div className="d-flex align-items-center">
+                <h1>Tags</h1>
+                <div className="dh-addTag">&#x2b;</div>
+            </div>
             <div className="d-flex flex-wrap" key={tags.id}>
                 {tags.map((tags) => (
                     <Badge color="primary" pill className="dh-badge m-1 pl-3 pr-3">{tags.name} <span className="xOut">&#10005;</span>

@@ -34,7 +34,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        /*public Tag GetById(int tagId)
+        public Tag GetById(int tagId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -67,9 +67,9 @@ namespace Tabloid.Repositories
                     return null;
                 }
             }
-        }*/
+        }
 
-        /*public void AddTag(Tag tag)
+        public void AddTag(Tag tag)
         {
             using (var conn = Connection)
             {
@@ -86,7 +86,7 @@ namespace Tabloid.Repositories
                     tag.Id = (int)cmd.ExecuteScalar();
                 }
             }
-        }*/
+        }
 
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

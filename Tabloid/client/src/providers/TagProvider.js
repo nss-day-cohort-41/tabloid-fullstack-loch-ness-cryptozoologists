@@ -19,7 +19,7 @@ export function TagProvider(props) {
             }).then(resp => resp.json())
                 .then(setTags));
 
-  /* const addTag = (tag) =>
+  const addTag = (tag) =>
     getToken().then((token) =>
       fetch(apiUrl, {
         method: "POST",
@@ -33,10 +33,10 @@ export function TagProvider(props) {
           return resp.json();
         }
         throw new Error("Unauthorized");
-      })); */
+      }));
 
   return (
-        <TagContext.Provider value={{ tags, getAllTags }}>
+        <TagContext.Provider value={{ tags, getAllTags, addTag }}>
             {props.children}
         </TagContext.Provider>
     );
