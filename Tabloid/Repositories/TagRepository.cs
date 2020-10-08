@@ -7,8 +7,8 @@ namespace Tabloid.Repositories
 {
     public class TagRepository : BaseRepository, ITagRepository
     {
-        public TagRepository(IConfiguration config) : base(config) { }
-        public List<Tag> GetAll()
+        public TagRepository(IConfiguration configuration) : base(configuration) { }
+        public List<Tag> GetAllTags()
         {
             using (var conn = Connection)
             {
@@ -17,26 +17,24 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = "SELECT id, name FROM Tag";
                     var reader = cmd.ExecuteReader();
-
                     var tags = new List<Tag>();
-
                     while (reader.Read())
                     {
-                        tags.Add(new Tag()
+                        var atag = new Tag()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("name")),
-                        });
+                        };
+                        tags.Add(atag);
                     }
 
                     reader.Close();
-
                     return tags;
                 }
             }
         }
 
-        public Tag GetById(int tagId)
+        /*public Tag GetById(int tagId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -69,9 +67,9 @@ namespace Tabloid.Repositories
                     return null;
                 }
             }
-        }
+        }*/
 
-        public void AddTag(Tag tag)
+        /*public void AddTag(Tag tag)
         {
             using (var conn = Connection)
             {
@@ -88,7 +86,7 @@ namespace Tabloid.Repositories
                     tag.Id = (int)cmd.ExecuteScalar();
                 }
             }
-        }
+        }*/
 
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -144,7 +142,7 @@ namespace Tabloid.Repositories
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-        public void Delete(int id)
+        /*public void Delete(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -163,9 +161,9 @@ namespace Tabloid.Repositories
                 }
             }
 
-        }
+        }*/
 
-        public void Edit(Tag tag)
+        /*public void Edit(Tag tag)
         {
             using (SqlConnection conn = Connection)
             {
@@ -184,12 +182,12 @@ namespace Tabloid.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
+        }*/
 
-        public Post GetPostById(int id)
+        /*public Post GetPostById(int id)
         {
             throw new System.NotImplementedException();
-        }
+        }*/
 
         /* public Tag GetTagByPostId()
          {

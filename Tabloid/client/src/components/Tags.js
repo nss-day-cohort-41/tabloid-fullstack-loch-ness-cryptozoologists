@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { TagContext } from "../providers/TagProvider";
+import { ListGroup, ListGroupItem } from "reactstrap";
+const Tags = () => {
+    const { tags, getAllTags } = useContext(TagContext);
 
-export default function Tags() {
-  return (
-    <span style={{
-      position: "fixed",
-      left: 0,
-      right: 0,
-      top: "50%",
-      marginTop: "-0.5rem",
-      textAlign: "center",
-    }}>Tags</span>
-  );
-}
+    useEffect(() => {
+        getAllTags();
+    }, []);
+
+    return (
+        <div>
+            <h1>Tags</h1>
+            {tags.map((tags) => (
+
+                <div key={tags.id}>
+                    <ListGroup>
+                        <ListGroupItem>{tags.name}</ListGroupItem>
+                    </ListGroup>
+
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default Tags;

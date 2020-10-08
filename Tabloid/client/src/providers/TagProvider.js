@@ -1,7 +1,7 @@
-import React, { useState, createContext, useContext } from "react";
-import { UserProfileContext } from "./UserProfileProvider";
+import React, { useState, useContext } from "react";
+import { UserProfileContext } from "../providers/UserProfileProvider";
 
-export const TagContext = createContext();
+export const TagContext = React.createContext();
 
 export function TagProvider(props) {
   const apiUrl = "/api/tag";
@@ -9,17 +9,17 @@ export function TagProvider(props) {
 
   const [tags, setTags] = useState([]);
 
-  const refreshTags = () =>
-    getToken().then((token) =>
-      fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(resp => resp.json())
-        .then(setTags));
+  const getAllTags = () =>
+        getToken().then((token) =>
+            fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json())
+                .then(setTags));
 
-  const addTag = (tag) =>
+  /* const addTag = (tag) =>
     getToken().then((token) =>
       fetch(apiUrl, {
         method: "POST",
@@ -33,11 +33,11 @@ export function TagProvider(props) {
           return resp.json();
         }
         throw new Error("Unauthorized");
-      }));
+      })); */
 
   return (
-    <TagContext.Provider value={{ tags, refreshTags, addTag }}>
-      {props.children}
-    </TagContext.Provider>
-  );
+        <TagContext.Provider value={{ tags, getAllTags }}>
+            {props.children}
+        </TagContext.Provider>
+    );
 }

@@ -24,18 +24,18 @@ namespace Tabloid.Controllers
 
         public IActionResult Index()
         {
-            var tags = _tagRepository.GetAll();
+            var tags = _tagRepository.GetAllTags();
             return View(tags);
         }
 
-        public ActionResult Delete(int id)
+        /*public ActionResult Delete(int id)
         {
             Tag tag = _tagRepository.GetById(id);
             return View(tag);
-        }
+        }*/
 
         // POST: Tag/Delete/5
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Delete(int id, Tag tag)
         {
             try
@@ -48,15 +48,15 @@ namespace Tabloid.Controllers
             {
                 return View(tag);
             }
-        }
+        }*/
 
 
-        public IActionResult Create()
+        /*public IActionResult Create()
         {
             return View();
-        }
+        }*/
 
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult Create(Tag tag)
         {
             try
@@ -69,9 +69,9 @@ namespace Tabloid.Controllers
             {
                 return View(tag);
             }
-        }
+        }*/
 
-        public IActionResult Edit(int id)
+        /*public IActionResult Edit(int id)
         {
             Tag tag = _tagRepository.GetById(id);
 
@@ -81,9 +81,9 @@ namespace Tabloid.Controllers
             }
 
             return View(tag);
-        }
+        }*/
 
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Tag tag)
         {
@@ -98,7 +98,7 @@ namespace Tabloid.Controllers
             {
                 return View(tag);
             }
-        }
+        }*/
 
 
         /*[HttpPost]

@@ -5,11 +5,12 @@ namespace Tabloid.Repositories
 {
     public interface ITagRepository
     {
-        List<Tag> GetAll();
-        void AddTag(Tag tag);
-        void Edit(Tag tag);
-        Tag GetById(int id);
-        void Delete(int id);
+        List<Tag> GetAllTags();
+
+        //void AddTag(Tag tag);
+        //void Edit(Tag tag);
+        //Tag GetById(int id);
+        //void Delete(int id);
 
         //void DeleteTag(int tagId);
         //void UpdateTag(Tag tag);
