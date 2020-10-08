@@ -37,6 +37,11 @@ export default function ApplicationViews() {
           <CategoryList />
 
         </Route>
+        <Route path="/comment">
+
+          <CommentList />
+
+        </Route>
       </Switch>
     </main >
   );
