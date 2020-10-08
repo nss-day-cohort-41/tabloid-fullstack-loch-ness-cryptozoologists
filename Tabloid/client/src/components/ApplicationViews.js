@@ -7,6 +7,7 @@ import Hello from "./Hello";
 import CategoryList from "./CategoryList";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import PostList from "./PostList";
+import CommentList from "./CommentList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -35,6 +36,11 @@ export default function ApplicationViews() {
         <Route path="/categories">
 
           <CategoryList />
+
+        </Route>
+        <Route path="/comments">
+
+          <CommentList />
 
         </Route>
       </Switch>

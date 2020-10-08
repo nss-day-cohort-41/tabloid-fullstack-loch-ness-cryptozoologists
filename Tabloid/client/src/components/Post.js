@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardImg, CardBody } from "reactstrap";
+import { Card, CardImg, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
@@ -12,6 +12,7 @@ const Post = ({ post }) => {
                     <strong>{post.title}</strong>
                 </p>
                 <p>{post.caption}</p>
+                <Button href="http://localhost:3000/comments">View Comments</Button>
                 <Link to={`/posts/${post.id}`}>
                     <strong>{post.title}</strong>
                 </Link>
