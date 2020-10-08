@@ -5,7 +5,6 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import PostList from "./PostList";
-import { PostProvider } from "../providers/PostProvider";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
