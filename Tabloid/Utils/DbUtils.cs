@@ -123,14 +123,11 @@ namespace Tabloid.Utils
             }
         }
 
-<<<<<<< HEAD
-=======
         public static object ValueOrDBNull(object value)
         {
             return value ?? DBNull.Value;
         }
 
->>>>>>> master
         public static string GetNullableString(SqlDataReader reader, string column)
         {
             var ordinal = reader.GetOrdinal(column);
@@ -140,13 +137,5 @@ namespace Tabloid.Utils
             }
             return reader.GetString(ordinal);
         }
-<<<<<<< HEAD
-
-        public static object ValueOrDBNull(object value)
-        {
-            return value ?? DBNull.Value;
-        }
-=======
->>>>>>> master
     }
 }

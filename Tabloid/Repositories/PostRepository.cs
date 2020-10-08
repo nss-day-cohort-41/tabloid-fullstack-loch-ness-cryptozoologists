@@ -13,11 +13,7 @@ namespace Tabloid.Repositories
     public class PostRepository : BaseRepository, IPostRepository
     {
         public PostRepository(IConfiguration config) : base(config) { }
-<<<<<<< HEAD
-        public List<Post> GetAllPublishedPosts()
-=======
         public List<Post> GetAll()
->>>>>>> master
         {
             using (var conn = Connection)
             {
@@ -270,19 +266,11 @@ namespace Tabloid.Repositories
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
                 CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-<<<<<<< HEAD
-                /*Category = new Category()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-                },*/
-=======
                 Category = new Category()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                     Name = reader.GetString(reader.GetOrdinal("CategoryName"))
                 },
->>>>>>> master
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                 UserProfile = new UserProfile()
                 {
@@ -337,11 +325,7 @@ namespace Tabloid.Repositories
             List<string> wordList = words.ToList();
             int wordCount = wordList.Count();
             int time = (wordCount / 265) + 1;
-<<<<<<< HEAD
-            if(time <= 1)
-=======
             if (time <= 1)
->>>>>>> master
             {
                 return "Read time is: 1 minute";
             }
