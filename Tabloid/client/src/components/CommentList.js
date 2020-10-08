@@ -1,19 +1,28 @@
-import React, { useContext, UseEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { CommentContext } from "..providers/CommentProvider";
+import { ListGroup, ListGroupItem } from "reactstrap";
 
 const CommentList = () => {
-    const { comment, GetAllComments } = useContext(PostContext);
+    const { comments, getAllComments } = useContext(CommentContext);
 
     useEffect(() => {
         getAllComments();
     }, []);
 
     return (
-        <section>
-            {CommentList.map(comment =>
-                <Comment key={comment.id} comment={comment} />
-            )}
-        </section>
-    )
+        <div>
+            <h1>Comments</h1>
+            {comments.map((comment) => (
+
+                <div key={comment.id}>
+                    <ListGroup>
+                        <ListGroupItem>{comment.subject}</ListGroupItem>
+                        <p>{comment.content}</p>
+                    </ListGroup>
+
+                </div>
+            ))}
+        </div>
+    );
 }
 export default CommentList;
