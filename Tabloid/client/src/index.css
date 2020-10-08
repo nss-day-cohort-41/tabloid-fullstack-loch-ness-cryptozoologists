@@ -1,18 +1,50 @@
 main {
-  margin: 2em;
+    margin: 2em;
 }
+
 .app-spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -16px;
-  margin-left: -16px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -16px;
+    margin-left: -16px;
 }
- 
+
 p {
     line-height: 2rem;
 }
 
 .post p {
     white-space: pre-wrap;
+}
+
+.dh-badge {
+    padding: .5rem .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: hsla(211, 100%, 50%, 1);
+    font-weight: normal;
+    box-shadow: 1px 1px 1px -1px hsl(0deg 0% 0% / 50%);
+}
+
+.dh-badge:hover {
+    padding: .5rem .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: hsla(211, 100%, 40%, 1);
+    cursor: pointer;
+}
+
+.xOut {
+    font-size: .85rem;
+    font-weight: 100;
+    color: hsla(0, 0%, 100%, 0.25);
+    margin-left: .5rem;
+    cursor: pointer;
+}
+
+.xOut:hover {
+    color: hsla(0, 0%, 100%, 1);
 }
