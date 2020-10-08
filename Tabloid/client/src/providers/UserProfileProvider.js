@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import { Spinner } from "reactstrap";
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import { Redirect } from "react-router-dom";
 
 export const UserProfileContext = createContext();
 
@@ -31,7 +32,7 @@ export function UserProfileProvider(props) {
     return firebase.auth().signOut()
       .then(() => {
         sessionStorage.clear()
-        setIsLoggedIn(false);
+        setIsLoggedIn(false)
       });
   };
 
@@ -72,7 +73,7 @@ export function UserProfileProvider(props) {
     <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken }}>
       {isFirebaseReady
         ? props.children
-        : <Spinner className="app-spinner dark"/>}
+        : <Spinner className="app-spinner dark" />}
     </UserProfileContext.Provider>
   );
 }

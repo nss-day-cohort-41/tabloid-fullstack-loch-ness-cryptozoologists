@@ -5,14 +5,17 @@ import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import CategoryList from "./components/CategoryList";
 import { CategoryProvider } from "./providers/CategoryProvider";
+import { PostProvider } from './providers/PostProvider';
 
 function App() {
   return (
     <Router>
       <UserProfileProvider>
         <CategoryProvider>
-          <Header />
-          <ApplicationViews />
+          <PostProvider>
+            <Header />
+            <ApplicationViews />
+          </PostProvider>
         </CategoryProvider>
       </UserProfileProvider>
     </Router >
