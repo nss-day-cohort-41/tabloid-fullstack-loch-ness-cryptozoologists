@@ -5,6 +5,7 @@ namespace Tabloid.Repositories
 {
     public interface IPostRepository
     {
+<<<<<<< HEAD
         void Add(Post post);
         List<Post> GetAllPublishedPosts();
         Post GetPublishedPostById(int id);
@@ -14,5 +15,8 @@ namespace Tabloid.Repositories
         void UpdatePost(Post post);
         void DeletePost(int id);
         string ReadTime(string content);
+=======
+        List<Post> GetAll();
+>>>>>>> master
     }
 }

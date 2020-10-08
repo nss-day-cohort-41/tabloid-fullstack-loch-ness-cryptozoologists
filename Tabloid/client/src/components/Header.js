@@ -15,7 +15,7 @@ export default function Header() {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Home link */ }
+            { /* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn &&
               <NavItem>
                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
@@ -23,15 +23,13 @@ export default function Header() {
             }
           </Nav>
           <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Post link */ }
             {isLoggedIn &&
               <NavItem>
-                <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
+                <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
               </NavItem>
             }
           </Nav>
           <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Tag link */ }
             {isLoggedIn &&
               <NavItem>
                 <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
@@ -42,24 +40,31 @@ export default function Header() {
             {isLoggedIn &&
               <>
                 <NavItem>
-                  <a aria-current="page" className="nav-link"
-                    style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                  <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} onClick={logout} to="/login">Logout</NavLink>
+                </NavItem>
+
               </>
             }
             {!isLoggedIn &&
               <>
+
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/login">Login</NavLink>
                 </NavItem>
-                <NavItem>
+
+                < NavItem >
                   <NavLink tag={RRNavLink} to="/register">Register</NavLink>
                 </NavItem>
+
+
               </>
             }
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+    </div >
   );
 }
