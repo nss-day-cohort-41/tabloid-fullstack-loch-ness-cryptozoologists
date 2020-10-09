@@ -6,7 +6,9 @@ import Register from "./Register";
 import Hello from "./Hello";
 import CategoryList from "./CategoryList";
 import { CategoryProvider } from "../providers/CategoryProvider";
+import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
+import Tags from "./Tags";
 import PostDetails from "./PostDetails";
 
 export default function ApplicationViews() {
@@ -31,6 +33,9 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/tags">
+          <Tags />
+        </Route>
 
 
 
@@ -39,10 +44,9 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/categories">
-
           <CategoryList />
-
         </Route>
+
       </Switch>
     </main >
   );

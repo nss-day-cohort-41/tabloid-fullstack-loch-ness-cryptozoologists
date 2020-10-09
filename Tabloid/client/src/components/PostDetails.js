@@ -5,11 +5,10 @@ import Post from "./Post";
 
 
 const PostDetails = () => {
-    const [post, setPost] = useState({});
-    const { getPost, singlePost } = useContext(PostContext);
+    const [post, setPost] = useState(null);
+    const { getPost } = useContext(PostContext);
     const { id } = useParams();
 
-    console.log(id, "id")
 
     useEffect(() => {
         getPost(id).then(setPost);
@@ -19,14 +18,13 @@ const PostDetails = () => {
         return null;
     }
 
-
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-sm-12 col-lg-6">
 
                     <Post key={post.id} post={post} />
-                    <p>blue</p>
+                    <strong>{post.title}</strong>
                 </div>
             </div>
         </div>
