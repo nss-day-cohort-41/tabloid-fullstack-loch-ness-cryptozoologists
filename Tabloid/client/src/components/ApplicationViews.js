@@ -10,6 +10,7 @@ import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import Tags from "./Tags";
 import PostDetails from "./PostDetails";
+import CommentList from "./CommentList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -46,6 +47,7 @@ export default function ApplicationViews() {
         <Route path="/categories">
           <CategoryList />
         </Route>
+
 
       </Switch>
     </main >

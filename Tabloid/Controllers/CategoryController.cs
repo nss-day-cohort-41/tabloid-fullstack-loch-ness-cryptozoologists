@@ -30,17 +30,12 @@ namespace Tabloid.Controllers
             return Ok(_categoryRepository.GetAllCategories());
         }
 
-        //[HttpPost]
-        //public IActionResult Post(Category category)
-        //{
-        //    var currentUserProfile = GetCurrentUserProfile();
-        //    if (currentUserProfile.UserType.Name != "admin")
-        //    {
-        //        return Unauthorized();
-        //    }
-        //    category.UserProfileId = currentUserProfile.Id;
-        //    _categoryRepository.Add(category);
-        //    return CreatedAtAction(nameof(Get), new { id = category.Id }, category);
-        //}
+        [HttpPost]
+        public IActionResult AddCategory(Category category)
+        {
+            _categoryRepository.AddCategory(category);
+            return CreatedAtAction("Get", new { id = category.Id }, category);
+
+        }
     }
 }

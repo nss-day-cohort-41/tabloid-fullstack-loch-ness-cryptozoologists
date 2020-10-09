@@ -7,6 +7,7 @@ import { PostProvider } from "./providers/PostProvider"
 import { TagProvider } from "./providers/TagProvider"
 import CategoryList from "./components/CategoryList";
 import { CategoryProvider } from "./providers/CategoryProvider";
+import { CommentProvider } from './providers/CommentProvider';
 
 function App() {
   return (
@@ -14,12 +15,14 @@ function App() {
       <UserProfileProvider>
         <CategoryProvider>
           <PostProvider>
+
             <TagProvider>
               <div className="container">
                 <Header />
                 <ApplicationViews />
               </div>
             </TagProvider>
+
           </PostProvider>
         </CategoryProvider>
       </UserProfileProvider>

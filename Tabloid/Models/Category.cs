@@ -14,6 +14,8 @@ namespace Tabloid.Models
 
         [Required]
         public string Name { get; set; }
+        
+        public object UserProfileId { get; internal set; }
     }
 
        
