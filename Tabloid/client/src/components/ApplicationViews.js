@@ -9,6 +9,7 @@ import { CategoryProvider } from "../providers/CategoryProvider";
 import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import Tags from "./Tags";
+import PostDetails from "./PostDetails";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -24,13 +25,19 @@ export default function ApplicationViews() {
           <Login />
         </Route>
 
-        <Route path="/post">
+        <Route path="/post/:id">
+          {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags">
           <Tags />
         </Route>
+
+
 
         <Route path="/register">
           <Register />
