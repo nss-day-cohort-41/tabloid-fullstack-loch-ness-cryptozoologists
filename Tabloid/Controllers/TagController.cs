@@ -29,5 +29,12 @@ namespace Tabloid.Controllers
             return Ok(_tagRepository.GetAllTags());
         }
 
+        [HttpPost]
+        public IActionResult AddTag(Tag tag)
+        {
+            _tagRepository.AddTag(tag);
+            return CreatedAtAction("Get", new { id = tag.Id }, tag);
+        }
+
     }
 }

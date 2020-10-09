@@ -1,27 +1,33 @@
 import React, { useContext, useEffect } from "react";
 import { TagContext } from "../providers/TagProvider";
 import { Badge } from "reactstrap";
-const Tags = () => {
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Tag from "./Tag";
+
+
+const TagList = () => {
     const { tags, getAllTags } = useContext(TagContext);
 
     useEffect(() => {
         getAllTags();
     }, []);
 
+
+
     return (
+
         <div>
-            <div className="d-flex align-items-center">
-                <h1>Tags</h1>
+            <Link to={`/tags/add`}>
                 <div className="dh-addTag">&#x2b;</div>
-            </div>
-            <div className="d-flex flex-wrap" key={tags.id}>
+            </Link>
+            <div className="row">
                 {tags.map((tags) => (
-                    <Badge color="primary" pill className="dh-badge m-1 pl-3 pr-3">{tags.name} <span className="xOut">&#10005;</span>
-                    </Badge>
+                    <Tag key={tags.id} tags={tags} />
                 ))}
             </div>
         </div>
     );
 };
 
-export default Tags;
+export default TagList;
