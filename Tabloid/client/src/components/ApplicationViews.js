@@ -10,6 +10,7 @@ import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
 import Tags from "./Tags";
+import PostDetails from "./PostDetails";
 
 
 export default function ApplicationViews() {
@@ -26,13 +27,19 @@ export default function ApplicationViews() {
           <Login />
         </Route>
 
-        <Route path="/post">
+        <Route path="/post/:id">
+          {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags">
           <Tags />
         </Route>
+
+
 
         <Route path="/register">
           <Register />
