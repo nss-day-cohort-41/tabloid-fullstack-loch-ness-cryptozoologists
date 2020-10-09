@@ -23,6 +23,7 @@ namespace Tabloid
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
 

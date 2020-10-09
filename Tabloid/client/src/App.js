@@ -15,14 +15,14 @@ function App() {
       <UserProfileProvider>
         <CategoryProvider>
           <PostProvider>
-
-            <TagProvider>
-              <div className="container">
-                <Header />
-                <ApplicationViews />
-              </div>
-            </TagProvider>
-
+            <CommentProvider>
+              <TagProvider>
+                <div className="container">
+                  <Header />
+                  <ApplicationViews />
+                </div>
+              </TagProvider>
+            </CommentProvider>
           </PostProvider>
         </CategoryProvider>
       </UserProfileProvider>

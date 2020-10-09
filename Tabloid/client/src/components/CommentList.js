@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { CommentContext } from "..providers/CommentProvider";
+import { CommentContext } from "../providers/CommentProvider";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
 const CommentList = () => {
