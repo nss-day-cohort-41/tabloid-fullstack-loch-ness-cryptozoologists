@@ -41,7 +41,7 @@ export default function ApplicationViews() {
         <Route path="/categories">
           <CategoryList />
         </Route>
-        <Route path="/comments">
+        <Route path="/comments/:id">
 
           <CommentList />
 

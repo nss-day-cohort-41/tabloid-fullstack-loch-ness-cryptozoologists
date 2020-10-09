@@ -4,23 +4,23 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 export const CommentContext = React.createContext();
 
 export function CommentProvider(props) {
-    const apiUrl = "/api/comment";
+    const apiUrl = "/api/comment"; //Id Gifter
     const { getToken } = useContext(UserProfileContext);
 
     const [comments, setComments] = useState([]);
 
-    const getAllComments = () =>
+    const getComments = (id) =>
         getToken().then((token) =>
-            fetch(apiUrl, {
+            fetch(apiUrl + `${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json())
-                .then(setComments));
+            }).then(resp => resp.json()))
+
 
     return (
-        <CommentContext.Provider value={{ comments, getAllComments }}>
+        <CommentContext.Provider value={{ comments, getComments }}>
             {props.children}
         </CommentContext.Provider>
     );

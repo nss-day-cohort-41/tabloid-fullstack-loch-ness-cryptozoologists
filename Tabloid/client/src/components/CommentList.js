@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { CommentContext } from "../providers/CommentProvider";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import { useParams } from "react-router-dom";
+
 const CommentList = () => {
-    const { comments, getAllComments } = useContext(CommentContext);
+    const { comments, getComments } = useContext(CommentContext);
+    const { id } = useParams();
 
     useEffect(() => {
-        getAllComments();
+        getComments(id).then(getComments);
     }, []);
 
     return (

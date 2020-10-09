@@ -12,7 +12,7 @@ const Post = ({ post }) => {
                     <strong>{post.title}</strong>
                 </p>
                 <p>{post.caption}</p>
-                <Button href="http://localhost:3000/comments">View Comments</Button>
+                <Button href="http://localhost:3000/comment/1">View Comments</Button>
                 <Link to={`/posts/${post.id}`}>
                     <strong>{post.title}</strong>
                 </Link>

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Tabloid.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -24,10 +24,15 @@ namespace Tabloid.Controllers
         }
 
         // GET: api/<CategoryController>
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id}")]
+        public IActionResult GetAllCommentsByPostId(int id)
         {
-            return Ok(_commentRepository.GetAllComments());
+            var comment = _commentRepository.GetAllCommentsByPostId(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
         }
 
 
