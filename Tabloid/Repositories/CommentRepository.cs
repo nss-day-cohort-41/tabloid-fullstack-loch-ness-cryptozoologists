@@ -12,7 +12,7 @@ namespace Tabloid.Repositories
     {
         public CommentRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Comment> GetAllCommentsByPostId(int id)
+        public List<Comment> GetAllCommentsByPostId(int postId)
         {
             using (var conn = Connection)
             {
@@ -20,20 +20,16 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                      SELECT c.Id, c.PostId, c.UserProfileId, c.[Subject], c.Content, c.CreateDateTime, p.Title, u.DisplayName
-                        FROM Comment c
-                        JOIN Post p 
-                        ON c.PostId = p.Id
-                        JOIN UserProfile u
-                        ON c.UserProfileId = u.Id
-                        WHERE c.PostId = @id
+                      SELECT Id, 
+                        PostId, UserProfileId, 
+                        Subject, Content, CreateDateTime
+                        FROM Comment 
+                        WHERE PostId = @id
                         ORDER BY CreateDateTime DESC
                        ";
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    var comments = new List<Comment>();
-
+                    cmd.Parameters.AddWithValue("@id", postId);
                     var reader = cmd.ExecuteReader();
+                    List<Comment> comments = new List<Comment>();
 
                     while (reader.Read())
                     {
@@ -44,17 +40,8 @@ namespace Tabloid.Repositories
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             Subject = reader.GetString(reader.GetOrdinal("Subject")),
                             Content = reader.GetString(reader.GetOrdinal("Content")),
-                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                            Post = new Post
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("PostId")),
-                                Title = reader.GetString(reader.GetOrdinal("Title"))
-                            },
-                            UserProfile = new UserProfile
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                                DisplayName = reader.GetString(reader.GetOrdinal("DisplayName"))
-                            }
+                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),                 
+                         
                         };
 
                         comments.Add(comment);
@@ -63,7 +50,7 @@ namespace Tabloid.Repositories
 
                     reader.Close();
 
-                    return comments;
+                    return (comments);
                 }
             }
         }

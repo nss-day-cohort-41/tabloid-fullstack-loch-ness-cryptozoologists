@@ -24,10 +24,10 @@ namespace Tabloid.Controllers
         }
 
         // GET: api/<CategoryController>
-        [HttpGet("{id}")]
-        public IActionResult GetAllCommentsByPostId(int id)
+        [HttpGet("{postId}")]
+        public IActionResult GetAllCommentsByPostId(int postId)
         {
-            var comment = _commentRepository.GetAllCommentsByPostId(id);
+            var comment = _commentRepository.GetAllCommentsByPostId(postId);
             if (comment == null)
             {
                 return NotFound();
