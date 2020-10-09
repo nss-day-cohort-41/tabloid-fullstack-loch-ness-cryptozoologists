@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
 
 namespace Tabloid.Models
 {
@@ -14,7 +14,8 @@ namespace Tabloid.Models
 
         [Required]
         public string Content { get; set; }
-        [Required(ErrorMessage = "Correct image location is required")]
+        [Required(ErrorMessage ="Correct image location is required")]
+
         [DisplayName("Header Image URL")]
         [Url]
         public string ImageLocation { get; set; }
@@ -30,10 +31,16 @@ namespace Tabloid.Models
         [Required]
         [DisplayName("Category")]
         public int CategoryId { get; set; }
+
         public Category Category { get; set; }
 
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+
+        public int TagId { get; set; }
+        public Tag Tag { get; set; }
+        public List<Tag> Tags { get; set; }
+
     }
 }
