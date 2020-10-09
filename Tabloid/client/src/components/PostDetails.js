@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { PostContext } from "../providers/PostProvider";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import Post from "./Post";
 import { Link } from "react-router-dom";
 
