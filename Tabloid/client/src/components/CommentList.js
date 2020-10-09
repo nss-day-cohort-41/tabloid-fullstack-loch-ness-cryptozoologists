@@ -24,5 +24,5 @@ const CommentList = () => {
             ))}
         </div>
     );
-}
+};
 export default CommentList;
