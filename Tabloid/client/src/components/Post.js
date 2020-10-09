@@ -1,18 +1,16 @@
 import React from "react";
-import { Card, CardImg, CardBody } from "reactstrap";
+import { Container, Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
     return (
-        <Card className="m-4">
-            <p className="text-left px-2">Posted by: {post.userProfile.fullName} ({post.userProfile.userType.name})</p>
-            <CardImg top src={post.imageLocation} />
+        <Card className="my-2">
             <CardBody>
-                <strong>{post.title}</strong>
-                <p> Category: {post.category.name}</p>
-                <Link to={`/post/${post.id}`}>
-                    <strong>Details</strong>
-                </Link>
+                <CardTitle><h5>{post.title}</h5></CardTitle>
+                <CardImg top className="rounded-0 mb-3" src={post.imageLocation} />
+                <CardText>Posted by: {post.userProfile.fullName} - <em>{post.userProfile.userType.name}</em></CardText>
+                <Badge variant="info" pill>{post.category.name}</Badge>
+                {/* <CardText>Category: {post.category.name}</CardText> */}
             </CardBody>
         </Card>
     );

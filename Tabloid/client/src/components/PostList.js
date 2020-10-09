@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react";
+import { Container, Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { PostContext } from "../providers/PostProvider";
 import Post from "./Post";
+import { Link } from "react-router-dom";
+
 
 const PostList = () => {
     const { posts, getAllPosts } = useContext(PostContext);
@@ -10,15 +13,19 @@ const PostList = () => {
     }, []);
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="cards-column">
+        <Container>
+            <Row className="justify-content-center">
+                <div class="dh-grid">
                     {posts.map((post) => (
-                        <Post key={post.id} post={post} />
+                    <div class="dh-card">
+                        <Link to={`/post/${post.id}`}>
+                            <Post key={post.id} post={post} />
+                        </Link>
+                    </div>
                     ))}
                 </div>
-            </div>
-        </div>
+            </Row>
+        </Container>
     );
 };
 

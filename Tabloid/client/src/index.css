@@ -69,3 +69,42 @@ p {
 .xOut:hover {
     color: hsla(0, 0%, 100%, 1);
 }
+
+
+/* >>>>>>>>>>>> */
+
+.dh-grid {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+}
+
+.dh-card {
+    /*  */
+}
+
+.dh-card a {
+    text-decoration: none;
+}
+
+:root {
+    --hover: hsl(200, 100%, 98%);
+}
+
+.dh-card .card-body {
+    background: hsl(0, 0%, 98%);
+    cursor: pointer;
+}
+
+.dh-card:hover .card-body {
+    background: var(--hover);
+    box-shadow: 1px 1px 1px -1px hsl(0deg 0% 0% / 50%);
+}
+
+.dh-card .card-body {
+    color: var(--gray-dark);
+}
+
+.dh-card:hover .card-body {
+    color: var(--purple);
+}
