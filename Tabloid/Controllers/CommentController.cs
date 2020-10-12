@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tabloid.Models;
 using Tabloid.Repositories;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tabloid.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -19,52 +23,18 @@ namespace Tabloid.Controllers
             _commentRepository = commentRepository;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        // GET: api/<CategoryController>
+        [HttpGet("{postId}")]
+        public IActionResult GetAllCommentsByPostId(int postId)
         {
-            return Ok(_commentRepository.GetAll());
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            return Ok(_commentRepository.GetCommentsByPostId(id));
-        }
-
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    var comment = _commentRepository.GetCommentById(id);
-        //    if(comment == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(comment);
-        //}
-        [HttpPost]
-        public IActionResult Post(Comment comment)
-        {
-            _commentRepository.AddComment(comment);
-            return CreatedAtAction("Get", new { id = comment.Id }, comment);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Comment comment)
-        {
-            if (id != comment.Id)
+            var comment = _commentRepository.GetAllCommentsByPostId(postId);
+            if (comment == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _commentRepository.UpdateComment(comment);
-            return NoContent();
+            return Ok(comment);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _commentRepository.DeleteComment(id);
-            return NoContent();
-        }
+
     }
 }

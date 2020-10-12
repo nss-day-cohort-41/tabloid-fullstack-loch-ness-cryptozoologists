@@ -1,29 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Tabloid.Models;
 
 namespace Tabloid.Models
 {
-    // these are the propertires of a comment
     public class Comment
     {
         public int Id { get; set; }
+
         public int PostId { get; set; }
-        public UserProfile UserProfile { get; set; }
+
+        [DisplayName("Author")]
         public int UserProfileId { get; set; }
 
         [Required]
         public string Subject { get; set; }
 
         [Required]
+        [DisplayName("Comment")]
         public string Content { get; set; }
 
-        [Required]
+        [DataType(DataType.Date)]
         public DateTime CreateDateTime { get; set; }
-         
+        public Post Post { get; set; }
+
+        public UserProfile UserProfile { get; set; }
+
     }
 }

@@ -39,10 +39,10 @@ namespace Tabloid.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateCategory(Category Category)
+        public IActionResult UpdateCategory(Category category)
         {
             _categoryRepository.UpdateCategory(category);
-            return UpdateAtAction("Get")
-            }
+           
+        }
     }
 }

@@ -8,10 +8,10 @@ import CategoryList from "./CategoryList";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
+import CommentList from "./CommentList";
 import Tags from "./Tags";
 import PostDetails from "./PostDetails";
-import CommentList from "./CommentList";
-import CategoryAddForm from "./CategoryAddForm";
+
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -38,9 +38,7 @@ export default function ApplicationViews() {
         <Route path="/tags">
           <Tags />
         </Route>
-        <Route path="/comment">
-          <CommentList />
-        </Route>
+
 
 
         <Route path="/register">
@@ -50,10 +48,11 @@ export default function ApplicationViews() {
         <Route path="/categories">
           <CategoryList />
         </Route>
-        <Route path="/add">
-          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
-        </Route>
+        <Route path="/comments/:id">
 
+          <CommentList />
+
+        </Route>
 
       </Switch>
     </main >
