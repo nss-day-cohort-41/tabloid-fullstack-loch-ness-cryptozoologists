@@ -2,7 +2,7 @@ import React from "react";
 import { Badge } from "reactstrap";
 
 
-const Tag = ({ tags }) => {
+const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
 
 
 
@@ -13,9 +13,18 @@ const Tag = ({ tags }) => {
                 value={tags.id}
                 key={tags.id}>
                 {tags.name}
-                <span className="xOut">&#10005;</span>
-            </Badge>
-        </div>
+            </Badge >
+            <button
+                className="x-button"
+                onClick={() => tagToBeDeleted(tags)}>
+                X
+            </button>
+            <button
+                onClick={() => tagToBeEdited(tags)}
+            >
+                Edit
+            </button>
+        </div >
     );
 };
 

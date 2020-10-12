@@ -7,13 +7,21 @@ import Tag from "./Tag";
 
 
 const TagList = () => {
-    const { tags, getAllTags } = useContext(TagContext);
+    const { tags, getAllTags, deleteTag, editTag } = useContext(TagContext);
 
     useEffect(() => {
         getAllTags();
     }, []);
 
+    const tagToBeDeleted = (tag) => {
+        console.log("delete function", tag)
+        deleteTag(tag.id)
+    }
 
+    const tagToBeEdited = (tag) => {
+        console.log("edit function", tag)
+        editTag(tag)
+    }
 
     return (
 
@@ -23,7 +31,12 @@ const TagList = () => {
             </Link>
             <div className="row">
                 {tags.map((tags) => (
-                    <Tag key={tags.id} tags={tags} />
+                    <Tag
+                        key={tags.id}
+                        tags={tags}
+                        tagToBeDeleted={tagToBeDeleted}
+                        tagToBeEdited={tagToBeEdited}
+                    />
                 ))}
             </div>
         </div>
