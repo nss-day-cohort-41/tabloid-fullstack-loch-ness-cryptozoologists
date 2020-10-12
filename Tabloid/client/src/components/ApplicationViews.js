@@ -51,9 +51,10 @@ export default function ApplicationViews() {
           <CategoryList />
         </Route>
 
-        <Route path="/categories/edit/:id">
+        <Route path="/categories/edit">
           <CategoryEditForm />
         </Route>
+
 
         <Route path="/categories/add">
           <CategoryAddForm />
