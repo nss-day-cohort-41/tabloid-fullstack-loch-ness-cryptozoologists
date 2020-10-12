@@ -38,11 +38,11 @@ namespace Tabloid.Controllers
 
         }
 
-        [HttpPut]
-        public IActionResult UpdateCategory(Category category)
-        {
-            _categoryRepository.UpdateCategory(category);
+        //[HttpPut]
+        //public IActionResult UpdateCategory(Category category)
+        //{
+        //    _categoryRepository.UpdateCategory(category);
            
-        }
+        //}
     }
 }
