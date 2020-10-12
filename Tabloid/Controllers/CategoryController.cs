@@ -37,5 +37,12 @@ namespace Tabloid.Controllers
             return CreatedAtAction("Get", new { id = category.Id }, category);
 
         }
+
+        [HttpPut]
+        public IActionResult UpdateCategory(Category Category)
+        {
+            _categoryRepository.UpdateCategory(category);
+            return UpdateAtAction("Get")
+            }
     }
 }
