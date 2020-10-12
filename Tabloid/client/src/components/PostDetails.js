@@ -1,10 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { PostContext } from "../providers/PostProvider";
-import { useParams } from "react-router-dom";
-import { Container, Row, Col } from 'reactstrap';
+import { Link, useParams } from "react-router-dom";
 import Post from "./Post";
-import { Link } from "react-router-dom";
-
+import { CommentContext } from "../providers/CommentProvider";
 
 const PostDetails = () => {
     const [post, setPost] = useState(null);
@@ -28,6 +26,7 @@ const PostDetails = () => {
 
                     <Post key={post.id} post={post} />
                     {/* <strong>{post.title}</strong> */}
+                    <Link to={`/comments/${id}`}>Comments</Link>
 
                     <p><Link to={`/post/`}>&#60; Back</Link></p>
                 </Col>
