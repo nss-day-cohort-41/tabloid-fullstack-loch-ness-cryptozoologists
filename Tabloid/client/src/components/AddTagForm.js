@@ -15,6 +15,9 @@ export default function AddTagForm() {
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
 
+    console.log(tagName, "blje")
+
+
     return (
         <Form onSubmit={submitForm}>
             <FormGroup>

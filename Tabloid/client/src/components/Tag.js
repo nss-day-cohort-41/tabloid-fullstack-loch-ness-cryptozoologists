@@ -1,5 +1,6 @@
 import React from "react";
 import { Badge } from "reactstrap";
+import { Link } from "react-router-dom";
 
 
 const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
@@ -19,11 +20,7 @@ const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
                 onClick={() => tagToBeDeleted(tags)}>
                 X
             </button>
-            <button
-                onClick={() => tagToBeEdited(tags)}
-            >
-                Edit
-            </button>
+            <Link to={`/tags/edit/${tags.id}`}>edit</Link>
         </div >
     );
 };

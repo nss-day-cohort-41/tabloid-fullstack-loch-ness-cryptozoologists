@@ -12,6 +12,7 @@ import CommentList from "./CommentList";
 import PostDetails from "./PostDetails";
 import AddTagForm from "./AddTagForm";
 import TagList from "./TagList";
+import EditTagForm from "./EditTagForm";
 
 
 export default function ApplicationViews() {
@@ -40,9 +41,9 @@ export default function ApplicationViews() {
           <AddTagForm />
         </Route>
 
-        {/* <Route path="/tags/edit">
-
-        </Route> */}
+        <Route path="/tags/edit/:id">
+          <EditTagForm />
+        </Route>
 
         <Route path="/tags" exact>
           <TagList />

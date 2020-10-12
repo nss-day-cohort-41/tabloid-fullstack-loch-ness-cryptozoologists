@@ -7,20 +7,18 @@ import Tag from "./Tag";
 
 
 const TagList = () => {
-    const { tags, getAllTags, deleteTag, editTag } = useContext(TagContext);
+    const { tags, getAllTags, deleteTag, getTagById } = useContext(TagContext);
 
     useEffect(() => {
         getAllTags();
     }, []);
 
     const tagToBeDeleted = (tag) => {
-        console.log("delete function", tag)
         deleteTag(tag.id)
     }
 
     const tagToBeEdited = (tag) => {
-        console.log("edit function", tag)
-        editTag(tag)
+        getTagById(tag.id)
     }
 
     return (

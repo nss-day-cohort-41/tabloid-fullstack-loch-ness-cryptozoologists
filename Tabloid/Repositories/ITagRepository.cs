@@ -8,9 +8,9 @@ namespace Tabloid.Repositories
         List<Tag> GetAllTags();
 
         void AddTag(Tag tag);
-        //void Edit(Tag tag);
-        //Tag GetById(int id);
-        //void Delete(int id);
+        void Edit(Tag tag);
+        Tag GetById(int id);
+        void Delete(int id);
 
         //void DeleteTag(int tagId);
         //void UpdateTag(Tag tag);
