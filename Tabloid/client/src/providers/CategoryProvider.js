@@ -35,8 +35,26 @@ export function CategoryProvider(props) {
                 }
                 throw new Error("Unauthorized");
             }));
+
+    const editCategory = (category) =>
+        getToken().then((token) =>
+            fetch(apiUrl, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(category)
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+                throw new Error("Unauthorized");
+            }));
+
+
     return (
-        <CategoryContext.Provider value={{ categories, getAllCategories, addCategory }}>
+        <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, editCategory }}>
             {props.children}
         </CategoryContext.Provider>
     );

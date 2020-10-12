@@ -6,6 +6,8 @@ using Tabloid.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Utils;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace Tabloid.Repositories
 {
@@ -60,7 +62,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void UpdateCategory(Category category)
+        public void Update(Category category)
         {
             using (var conn = Connection)
             {

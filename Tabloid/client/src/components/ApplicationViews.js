@@ -11,6 +11,8 @@ import PostList from "./PostList";
 import CommentList from "./CommentList";
 import Tags from "./Tags";
 import PostDetails from "./PostDetails";
+import CategoryAddForm from "./CategoryAddForm";
+import CategoryEditForm from "./CategoryEditForm";
 
 
 export default function ApplicationViews() {
@@ -41,13 +43,22 @@ export default function ApplicationViews() {
 
 
 
-        <Route path="/register">
+        <Route path="/register" >
           <Register />
         </Route>
 
-        <Route path="/categories">
+        <Route path="/categories" exact>
           <CategoryList />
         </Route>
+
+        <Route path="/categories/edit/:id">
+          <CategoryEditForm />
+        </Route>
+
+        <Route path="/categories/add">
+          <CategoryAddForm />
+        </Route>
+
         <Route path="/comments/:id">
 
           <CommentList />
