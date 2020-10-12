@@ -7,9 +7,9 @@ import Hello from "./Hello";
 import CategoryList from "./CategoryList";
 //import { CategoryProvider } from "../providers/CategoryProvider";
 //import { TagProvider } from "../providers/TagProvider";
-import PostList from "./PostList";
 import CommentList from "./CommentList";
 import Tags from "./Tags";
+import PostList from "./PostList";
 import PostDetails from "./PostDetails";
 import PostForm from "./PostForm";
 
@@ -28,15 +28,15 @@ export default function ApplicationViews() {
           <Login />
         </Route>
 
-        <Route path="/post/:id">
-          {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
-        </Route>
-
         <Route path="/post" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/post/form" exact>
+        <Route path="/post/:id" exact>
+          {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post/edit/:id" exact>
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
 
@@ -51,10 +51,9 @@ export default function ApplicationViews() {
         <Route path="/categories">
           <CategoryList />
         </Route>
+
         <Route path="/comments/:id">
-
           <CommentList />
-
         </Route>
 
       </Switch>

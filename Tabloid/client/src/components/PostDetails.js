@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import { Container, Row, Col } from 'reactstrap';
 import { PostContext } from "../providers/PostProvider";
 import { Link, useParams } from "react-router-dom";
 import Post from "./Post";
@@ -8,7 +9,6 @@ const PostDetails = () => {
     const [post, setPost] = useState(null);
     const { getPost } = useContext(PostContext);
     const { id } = useParams();
-
 
     useEffect(() => {
         getPost(id).then(setPost);

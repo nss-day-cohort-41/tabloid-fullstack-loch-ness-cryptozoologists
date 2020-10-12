@@ -9,5 +9,8 @@ namespace Tabloid.Repositories
         Post GetPublishedPostById(int id);
 
         void Add(Post post);
+
+        //void UpdatePost(Post post);
+        void UpdatePost(Post post);
     }
 }

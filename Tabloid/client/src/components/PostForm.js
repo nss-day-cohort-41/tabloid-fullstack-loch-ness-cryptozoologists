@@ -1,36 +1,34 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PostContext } from "../providers/PostProvider";
+import { useHistory, Link, useParams } from "react-router-dom";
 import { CategoryContext } from "../providers/CategoryProvider";
-export default function PostForm() {
-  const { addPost } = useContext(PostContext);
-  const [post, setPost] = useState({ postTitle: "", postContent: "" ,postImage: undefined, postCategory: "", isApproved: true, content: "", createDateTime: "", publishDateTime: "", categoryId: 0, userProfileId: 0 })
-  const { category, getAllCategories } = useContext(CategoryContext);
+import Post from './Post'
+//import { UserProfileContext } from "../providers/UserProfileProvider";
 
-/*   const submitForm = (e) => {
-    e.preventDefault();
-    addPost({ text: postText })
-    .then(() => history.push("/"))
-    .catch((err) => alert(`An error ocurred: ${err.message}`));
-  };
- */
+export default function PostForm() {
+  const { getPost } = useContext(PostContext);
+  const { editPost } = useContext(PostContext);
+  const { id } = useParams();
+  const [post, setPost] = useState(null);
+  const { categories, getAllCategories } = useContext(CategoryContext);
+
+  useEffect(() => {
+    getPost(id).then(setPost).then(
+      getAllCategories().then(console.log("Yo", post))
+      )
+  }, []);
 
   const submitForm = (e) => {
     post.createDateTime = new Date();
     post.categoryId = parseInt(post.categoryId);
-    addPost(post).then((p) => {
+    editPost(post).then((p) => {
       history.push(`/post/${p.id}`);
     });
   };
 
-
   const history = useHistory();
   const currentUser = JSON.parse(sessionStorage.userProfile);
-
-  useEffect(() => {
-      getAllCategories();
-  }, []);
 
   return (
     <Form onSubmit={submitForm}>
@@ -42,7 +40,7 @@ export default function PostForm() {
 
       <FormGroup>
         <Label for="postContent">Content</Label>
-        <textarea id="postContent" type="textarea" rows ="8" onChange={e => setPost(e.target.value)}></textarea>
+        <Input type="textarea" id="postContent" rows ="4" onChange={e => setPost(e.target.value)} />
       </FormGroup>
 
       <FormGroup>

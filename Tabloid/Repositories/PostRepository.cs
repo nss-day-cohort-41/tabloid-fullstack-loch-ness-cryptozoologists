@@ -335,5 +335,10 @@ namespace Tabloid.Repositories
                 return $"Read time is: {time} minutes";
             }
         }
+
+        public object UpdatePost(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
