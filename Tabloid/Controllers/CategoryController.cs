@@ -30,6 +30,19 @@ namespace Tabloid.Controllers
             return Ok(_categoryRepository.GetAllCategories());
         }
 
-        
+        [HttpPost]
+        public IActionResult AddCategory(Category category)
+        {
+            _categoryRepository.AddCategory(category);
+            return CreatedAtAction("Get", new { id = category.Id }, category);
+
+        }
+
+        [HttpPut]
+        public IActionResult UpdateCategory(Category category)
+        {
+            _categoryRepository.UpdateCategory(category);
+           
+        }
     }
 }
