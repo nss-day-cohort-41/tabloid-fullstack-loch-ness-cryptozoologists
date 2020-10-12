@@ -235,6 +235,7 @@ namespace Tabloid.Repositories
             }
         }
 
+       
         public void DeletePost(int postId)
         {
             using (SqlConnection conn = Connection)
