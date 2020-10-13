@@ -28,20 +28,14 @@ export function TagProvider(props) {
 
   const editTag = (updatedTag) =>
     getToken().then((token) =>
-      fetch(`${apiUrl}/${updatedTag.Id}`, {
+      fetch(`${apiUrl}/${updatedTag.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(updatedTag.Name)
+        body: JSON.stringify(updatedTag)
       })
-        .then(resp => {
-          if (resp.ok) {
-            return resp.json();
-          }
-          throw new Error("Unauthorized");
-        })
     )
 
   const getAllTags = () =>
