@@ -6,18 +6,26 @@ import { CategoryContext } from "../providers/CategoryProvider";
 export default function CategoryEditForm() {
     const history = useHistory();
     const { getSingleCategory, editCategory, category } = useContext(CategoryContext);
-    const [categoryName, setCategoryName] = useState({});
+    const [categoryText, setCategoryText] = useState({ id: "", name: "", userProfileId: null });
+    const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
 
 
     const handleFieldChange = evt => {
-        const stateToChange = { ...categoryName };
+        const stateToChange = { ...categoryText };
         stateToChange[evt.target.id] = evt.target.value;
-        setCategoryName(stateToChange);
+        setCategoryText(stateToChange);
     }
     const submitForm = (e) => {
         e.preventDefault();
-        editCategory(categoryName)
+        setIsLoading(true);
+        const updatedCategory = {
+            name: categoryText.name,
+            id: categoryText.id
+        }
+        console.log(updatedCategory, "text3")
+        editCategory(updatedCategory)
+
 
             .then(() => history.push("/categories"))
 
@@ -28,23 +36,30 @@ export default function CategoryEditForm() {
     const cancelSubmit = () => {
         history.push("/categories")
     };
-
+    console.log(categoryText, "test");
+    console.log(category, "test2")
     useEffect(() => {
-        getSingleCategory(id);
-    }, [id]);
-    useEffect(() => {
-        setCategoryName(category);
-    }, [category]);
+        getSingleCategory(id)
+            .then(setCategoryText)
+        setIsLoading(false);
+    }, []);
+    // useEffect(() => {
+    //     setCategoryText(category);
+    // }, [category]);
 
     return (
         <Form onSubmit={submitForm}>
             <FormGroup>
-                <Label for="categoryName">Category</Label>
-                <Input id="categoryName" type="textarea" defaultValue={categoryName.name} maxLength="50" onChange={handleFieldChange} />
+                <Label>Category</Label>
+                <Input id="name"
+                    type="textarea"
+                    value={categoryText.name}
+                    maxLength="50"
+                    onChange={handleFieldChange} />
 
             </FormGroup>
             <FormGroup>
-                <Button>Save</Button>
+                <Button disabled={isLoading}>Save</Button>
                 <Button onClick={cancelSubmit}>Cancel</Button>
             </FormGroup>
         </Form>

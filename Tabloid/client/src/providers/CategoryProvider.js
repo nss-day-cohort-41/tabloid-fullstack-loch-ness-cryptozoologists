@@ -53,7 +53,7 @@ export function CategoryProvider(props) {
 
     const editCategory = (category) => {
         return getToken().then((token) => {
-            fetch((`/api/categories/${category.id}`), {
+            fetch((`/api/category/${category.id}`), {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

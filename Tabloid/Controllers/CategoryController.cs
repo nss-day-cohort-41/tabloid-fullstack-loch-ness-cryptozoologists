@@ -58,5 +58,13 @@ namespace Tabloid.Controllers
             _categoryRepository.Update(category);
             return NoContent();
         }
+
+       // [HttpDelete("{id}")]
+       //public IActionResult DeleteCategory(int categoryId)
+       // {
+       //     _categoryRepository.DeleteCategroy(categoryId);
+       //     return NoContent();
+       // }
+       
     }
 }
