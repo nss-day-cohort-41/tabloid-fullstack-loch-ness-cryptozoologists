@@ -51,13 +51,12 @@ export default function ApplicationViews() {
           <CategoryList />
         </Route>
 
-        <Route path="/categories/edit">
-          <CategoryEditForm />
+        <Route path="/categories/add" exact>
+          <CategoryAddForm />
         </Route>
 
-
-        <Route path="/categories/add">
-          <CategoryAddForm />
+        <Route path="/categories/edit/:id" exact>
+          <CategoryEditForm />
         </Route>
 
         <Route path="/comments/:id">

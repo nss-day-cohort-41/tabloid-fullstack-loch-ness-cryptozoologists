@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+// import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
 
@@ -9,6 +10,8 @@ export function CategoryProvider(props) {
     const { getToken } = useContext(UserProfileContext);
 
     const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState([]);
+
 
     const getAllCategories = () =>
         getToken().then((token) =>
@@ -19,6 +22,18 @@ export function CategoryProvider(props) {
                 }
             }).then(resp => resp.json())
                 .then(setCategories));
+
+
+    const getSingleCategory = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/category/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json())
+                .then(setCategory));
+
 
     const addCategory = (category) =>
         getToken().then((token) =>
@@ -36,25 +51,21 @@ export function CategoryProvider(props) {
                 throw new Error("Unauthorized");
             }));
 
-    const editCategory = (category) =>
-        getToken().then((token) =>
-            fetch(apiUrl, {
+    const editCategory = (category) => {
+        return getToken().then((token) => {
+            fetch((`/api/categories/${category.id}`), {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(category)
-            }).then(resp => {
-                if (resp.ok) {
-                    return resp.json();
-                }
-                throw new Error("Unauthorized");
-            }));
-
+            })
+        })
+    };
 
     return (
-        <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, editCategory }}>
+        <CategoryContext.Provider value={{ category, categories, getAllCategories, getSingleCategory, addCategory, editCategory }}>
             {props.children}
         </CategoryContext.Provider>
     );
