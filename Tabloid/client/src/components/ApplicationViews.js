@@ -10,7 +10,7 @@ import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
 import PostDetails from "./PostDetails";
-import Tags from "./Tags";
+import Tag from "./Tag";
 import CategoryAddForm from "./CategoryAddForm";
 import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
@@ -41,7 +41,7 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/tags">
-          <Tags />
+          <Tag />
         </Route>
 
         <Route path="/tags/add">

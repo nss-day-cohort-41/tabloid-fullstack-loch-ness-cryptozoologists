@@ -17,7 +17,7 @@ const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
             </Badge >
             <button
                 className="x-button"
-                onClick={() => tagToBeDeleted(tags)}>
+                onClick={() => tagToBeDeleted(tag)}>
                 X
             </button>
             <Link to={`/tags/edit/${tags.id}`}>edit</Link>

@@ -13,12 +13,12 @@ const TagList = () => {
         getAllTags();
     }, []);
 
-    const tagToBeDeleted = (tag) => {
-        deleteTag(tag.id)
+    const tagToBeDeleted = (tags) => {
+        deleteTag(tags.id)
     }
 
-    const tagToBeEdited = (tag) => {
-        getTagById(tag.id)
+    const tagToBeEdited = (tags) => {
+        getTagById(tags.id)
     }
 
     return (
