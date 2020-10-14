@@ -9,10 +9,13 @@ import { CategoryProvider } from "../providers/CategoryProvider";
 import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
-import Tags from "./Tags";
 import PostDetails from "./PostDetails";
+import Tags from "./Tags";
 import CategoryAddForm from "./CategoryAddForm";
 import CategoryEditForm from "./CategoryEditForm";
+import AddTagForm from "./AddTagForm";
+import TagList from "./TagList";
+import EditTagForm from "./EditTagForm";
 
 
 export default function ApplicationViews() {
@@ -41,11 +44,22 @@ export default function ApplicationViews() {
           <Tags />
         </Route>
 
+        <Route path="/tags/add">
+          <AddTagForm />
+        </Route>
 
+        <Route path="/tags/edit/:id">
+          <EditTagForm />
+        </Route>
 
-        <Route path="/register" >
+        <Route path="/tags" exact>
+          <TagList />
+        </Route>
+
+        <Route path="/register">
           <Register />
         </Route>
+
 
         <Route path="/categories" exact>
           <CategoryList />

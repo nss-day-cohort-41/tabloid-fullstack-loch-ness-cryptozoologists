@@ -14,6 +14,19 @@ p {
     line-height: 2rem;
 }
 
+button {
+    background: transparent;
+    border: transparent;
+}
+
+.x-button {
+    background:  hsla(211, 100%, 50%, 1);
+    margin-left: -15%;
+    border-radius: 6px;
+    height: 75%;
+    margin-top: 4.5px;
+}
+
 .post p {
     white-space: pre-wrap;
 }

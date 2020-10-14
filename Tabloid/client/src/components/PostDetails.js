@@ -13,7 +13,6 @@ const PostDetails = () => {
     useEffect(() => {
         getPost(id).then(setPost);
     }, []);
-
     if (!post) {
         return null;
     }

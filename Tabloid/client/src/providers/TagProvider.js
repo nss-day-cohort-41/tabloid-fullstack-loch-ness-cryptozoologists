@@ -9,15 +9,6 @@ export function TagProvider(props) {
 
   const [tags, setTags] = useState([]);
 
-  const getAllTags = () =>
-        getToken().then((token) =>
-            fetch(apiUrl, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(resp => resp.json())
-                .then(setTags));
 
   const addTag = (tag) =>
     getToken().then((token) =>
@@ -35,9 +26,55 @@ export function TagProvider(props) {
         throw new Error("Unauthorized");
       }));
 
+  const editTag = (updatedTag) =>
+    getToken().then((token) =>
+      fetch(`${apiUrl}/${updatedTag.id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedTag)
+      })
+    )
+
+  const getAllTags = () =>
+    getToken().then((token) =>
+      fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setTags));
+
+  const getTagById = (id) =>
+    getToken().then((token) =>
+      fetch(`${apiUrl}/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+    )
+
+  const deleteTag = (id) =>
+    getToken().then((token) =>
+      fetch(`${apiUrl}/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      }).then(getAllTags));
+
+
+
+
+
+
   return (
-        <TagContext.Provider value={{ tags, getAllTags, addTag }}>
-            {props.children}
-        </TagContext.Provider>
-    );
+    <TagContext.Provider value={{ tags, getAllTags, addTag, deleteTag, editTag, getTagById }}>
+      {props.children}
+    </TagContext.Provider>
+  );
 }
