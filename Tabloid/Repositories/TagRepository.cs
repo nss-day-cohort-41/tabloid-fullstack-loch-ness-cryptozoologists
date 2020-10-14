@@ -87,6 +87,49 @@ namespace Tabloid.Repositories
                 }
             }
         }
+        public void Edit(Tag tag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                           UPDATE Tag
+                           SET Name = @name
+                           WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@name", tag.Name);
+                    cmd.Parameters.AddWithValue("@id", tag.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int id)
+       {
+           using (SqlConnection conn = Connection)
+           {
+               conn.Open();
+
+               using (var cmd = conn.CreateCommand())
+               {
+                   cmd.CommandText = @"
+                           DELETE FROM Tag
+                           WHERE Id = @id
+                       ";
+
+                   cmd.Parameters.AddWithValue("@id", id);
+
+                   cmd.ExecuteNonQuery();
+               }
+           }
+
+       }
+
+
 
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -142,47 +185,9 @@ namespace Tabloid.Repositories
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-        /*public void Delete(int id)
-        {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
 
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                            DELETE FROM Tag
-                            WHERE Id = @id
-                        ";
 
-                    cmd.Parameters.AddWithValue("@id", id);
 
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-        }*/
-
-        /*public void Edit(Tag tag)
-        {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
-
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                            UPDATE Tag
-                            SET Name = @name
-                            WHERE Id = @id";
-
-                    cmd.Parameters.AddWithValue("@name", tag.Name);
-                    cmd.Parameters.AddWithValue("@id", tag.Id);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }*/
 
         /*public Post GetPostById(int id)
         {
