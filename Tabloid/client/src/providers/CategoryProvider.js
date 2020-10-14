@@ -64,8 +64,17 @@ export function CategoryProvider(props) {
         })
     };
 
+    const deleteCategory = (id) =>
+        getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            }).then(getAllCategories));
+
     return (
-        <CategoryContext.Provider value={{ category, categories, getAllCategories, getSingleCategory, addCategory, editCategory }}>
+        <CategoryContext.Provider value={{ category, categories, getAllCategories, getSingleCategory, addCategory, editCategory, deleteCategory }}>
             {props.children}
         </CategoryContext.Provider>
     );

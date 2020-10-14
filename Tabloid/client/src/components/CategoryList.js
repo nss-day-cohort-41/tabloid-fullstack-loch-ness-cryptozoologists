@@ -10,6 +10,10 @@ const CategoryList = () => {
         getAllCategories();
     }, []);
 
+    // const CategoryToBeDeleted = (category) => {
+    //     deleteCategory(category.id)
+    // }
+
     return (
         <>
             <div>

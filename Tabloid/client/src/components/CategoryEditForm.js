@@ -16,6 +16,7 @@ export default function CategoryEditForm() {
         stateToChange[evt.target.id] = evt.target.value;
         setCategoryText(stateToChange);
     }
+
     const submitForm = (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -25,13 +26,11 @@ export default function CategoryEditForm() {
         }
         console.log(updatedCategory, "text3")
         editCategory(updatedCategory)
-
-
             .then(() => history.push("/categories"))
-
             .catch((err) => alert(`An error ocurred: ${err.message}`))
 
     };
+
 
     const cancelSubmit = () => {
         history.push("/categories")
