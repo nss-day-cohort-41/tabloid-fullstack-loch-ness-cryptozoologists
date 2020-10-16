@@ -3,7 +3,7 @@ import { TagContext } from "../providers/TagProvider";
 import { Badge } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import Tag from "./Tag";
+import Tags from "./Tag";
 
 
 const TagList = () => {
@@ -29,7 +29,7 @@ const TagList = () => {
             </Link>
             <div className="row">
                 {tags.map((tags) => (
-                    <Tag
+                    <Tags
                         key={tags.id}
                         tags={tags}
                         tagToBeDeleted={tagToBeDeleted}

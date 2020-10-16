@@ -3,7 +3,7 @@ import { Badge } from "reactstrap";
 import { Link } from "react-router-dom";
 
 
-const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
+const Tags = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
 
 
 
@@ -17,7 +17,7 @@ const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
             </Badge >
             <button
                 className="x-button"
-                onClick={() => tagToBeDeleted(tag)}>
+                onClick={() => tagToBeDeleted(tags)}>
                 X
             </button>
             <Link to={`/tags/edit/${tags.id}`}>edit</Link>
@@ -25,4 +25,4 @@ const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
     );
 };
 
-export default Tag;
+export default Tags;

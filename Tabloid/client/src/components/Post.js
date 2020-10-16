@@ -16,6 +16,5 @@ const Post = ({ post }) => {
             </CardBody>
         </Card>
     );
-};
-
+}
 export default Post;
