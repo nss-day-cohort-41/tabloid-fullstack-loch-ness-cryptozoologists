@@ -4,11 +4,12 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { CategoryContext } from "../providers/CategoryProvider";
 
 export default function CategoryEditForm() {
+    const { getSingleCategory, editCategory } = useContext(CategoryContext);
     const history = useHistory();
-    const { getSingleCategory, editCategory, category } = useContext(CategoryContext);
     const [categoryText, setCategoryText] = useState({ id: "", name: "", userProfileId: null });
-    const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
+    const [isLoading, setIsLoading] = useState(false);
+
 
 
     const handleFieldChange = evt => {
@@ -24,7 +25,7 @@ export default function CategoryEditForm() {
             name: categoryText.name,
             id: categoryText.id
         }
-        console.log(updatedCategory, "text3")
+
         editCategory(updatedCategory)
             .then(() => history.push("/categories"))
             .catch((err) => alert(`An error ocurred: ${err.message}`))
@@ -35,16 +36,12 @@ export default function CategoryEditForm() {
     const cancelSubmit = () => {
         history.push("/categories")
     };
-    console.log(categoryText, "test");
-    console.log(category, "test2")
+
     useEffect(() => {
         getSingleCategory(id)
             .then(setCategoryText)
         setIsLoading(false);
     }, []);
-    // useEffect(() => {
-    //     setCategoryText(category);
-    // }, [category]);
 
     return (
         <Form onSubmit={submitForm}>

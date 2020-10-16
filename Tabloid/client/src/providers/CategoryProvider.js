@@ -31,8 +31,8 @@ export function CategoryProvider(props) {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json())
-                .then(setCategory));
+            }).then(resp => resp.json()));
+
 
 
     const addCategory = (category) =>
