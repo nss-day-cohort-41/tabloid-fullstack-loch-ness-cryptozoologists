@@ -10,15 +10,20 @@ const CategoryList = () => {
         getAllCategories();
     }, []);
 
+    // getting the category by its id and deleting it
     const categoryToBeDeleted = (id) => {
         deleteCategory(id)
     }
+
+
 
     return (
         <>
             <div>
                 <h1>Categories</h1>
-                <Button type="button" href={`/categories/add`}
+                <Button
+                    type="button"
+                    href={`/categories/add`}
                     color="secondary">
                     Add Category
                     </Button>
@@ -26,7 +31,7 @@ const CategoryList = () => {
 
                     <div key={category.id}>
                         <ListGroup>
-                            <ListGroupItem>{category.name} </ListGroupItem>
+                            <ListGroupItem>{category.name}</ListGroupItem>
                             <Button
                                 type="button"
                                 onClick={() =>
