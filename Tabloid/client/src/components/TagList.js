@@ -1,9 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { TagContext } from "../providers/TagProvider";
-import { Badge } from "reactstrap";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import Tag from "./Tag";
+import Tags from "./Tag";
 
 
 const TagList = () => {
@@ -13,12 +11,12 @@ const TagList = () => {
         getAllTags();
     }, []);
 
-    const tagToBeDeleted = (tag) => {
-        deleteTag(tag.id)
+    const tagToBeDeleted = (tags) => {
+        deleteTag(tags.id)
     }
 
-    const tagToBeEdited = (tag) => {
-        getTagById(tag.id)
+    const tagToBeEdited = (tags) => {
+        getTagById(tags.id)
     }
 
     return (
@@ -29,7 +27,7 @@ const TagList = () => {
             </Link>
             <div className="row">
                 {tags.map((tags) => (
-                    <Tag
+                    <Tags
                         key={tags.id}
                         tags={tags}
                         tagToBeDeleted={tagToBeDeleted}

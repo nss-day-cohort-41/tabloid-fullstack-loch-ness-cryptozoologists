@@ -5,8 +5,6 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import CategoryList from "./CategoryList";
-import { CategoryProvider } from "../providers/CategoryProvider";
-import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
 import PostDetails from "./PostDetails";
@@ -38,7 +36,6 @@ export default function ApplicationViews() {
         <Route path="/post" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
-
 
         <Route path="/tags/add">
           <AddTagForm />

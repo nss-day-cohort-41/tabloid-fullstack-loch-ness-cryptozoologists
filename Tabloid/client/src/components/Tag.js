@@ -3,7 +3,7 @@ import { Badge } from "reactstrap";
 import { Link } from "react-router-dom";
 
 
-const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
+const Tags = ({ tags, tagToBeDeleted }) => {
 
 
 
@@ -25,4 +25,4 @@ const Tag = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
     );
 };
 
-export default Tag;
+export default Tags;
