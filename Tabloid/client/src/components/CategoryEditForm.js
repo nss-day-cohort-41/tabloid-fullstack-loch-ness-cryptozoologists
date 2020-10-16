@@ -4,12 +4,11 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { CategoryContext } from "../providers/CategoryProvider";
 
 export default function CategoryEditForm() {
+    const { getSingleCategory, editCategory } = useContext(CategoryContext);
     const history = useHistory();
-    const { getSingleCategory, editCategory, category } = useContext(CategoryContext);
     const [categoryText, setCategoryText] = useState({ id: "", name: "", userProfileId: null });
-    const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
-
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleFieldChange = evt => {
         const stateToChange = { ...categoryText };
@@ -36,15 +35,12 @@ export default function CategoryEditForm() {
         history.push("/categories")
     };
     console.log(categoryText, "test");
-    console.log(category, "test2")
+
     useEffect(() => {
         getSingleCategory(id)
             .then(setCategoryText)
         setIsLoading(false);
     }, []);
-    // useEffect(() => {
-    //     setCategoryText(category);
-    // }, [category]);
 
     return (
         <Form onSubmit={submitForm}>
@@ -58,8 +54,14 @@ export default function CategoryEditForm() {
 
             </FormGroup>
             <FormGroup>
-                <Button disabled={isLoading}>Save</Button>
-                <Button onClick={cancelSubmit}>Cancel</Button>
+                <Button
+                    disabled={isLoading}>
+                    Save
+                </Button>
+                <Button
+                    onClick={cancelSubmit}>
+                    Cancel
+                </Button>
             </FormGroup>
         </Form>
     );

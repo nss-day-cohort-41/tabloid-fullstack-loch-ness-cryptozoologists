@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { TagContext } from "../providers/TagProvider";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 export default function EditTagForm() {
     const { getTagById, editTag } = useContext(TagContext);

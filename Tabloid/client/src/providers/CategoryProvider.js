@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-// import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
 
@@ -8,9 +7,8 @@ export const CategoryContext = React.createContext();
 export function CategoryProvider(props) {
     const apiUrl = "/api/category";
     const { getToken } = useContext(UserProfileContext);
-
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState([]);
+
 
 
     const getAllCategories = () =>
@@ -32,7 +30,7 @@ export function CategoryProvider(props) {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setCategory));
+        );
 
 
     const addCategory = (category) =>
@@ -74,7 +72,7 @@ export function CategoryProvider(props) {
             }).then(getAllCategories));
 
     return (
-        <CategoryContext.Provider value={{ category, categories, getAllCategories, getSingleCategory, addCategory, editCategory, deleteCategory }}>
+        <CategoryContext.Provider value={{ categories, getAllCategories, getSingleCategory, addCategory, editCategory, deleteCategory }}>
             {props.children}
         </CategoryContext.Provider>
     );
