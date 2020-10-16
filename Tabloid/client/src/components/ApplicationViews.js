@@ -10,7 +10,6 @@ import { TagProvider } from "../providers/TagProvider";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
 import PostDetails from "./PostDetails";
-import Tags from "./Tags";
 import CategoryAddForm from "./CategoryAddForm";
 import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
@@ -40,9 +39,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/tags">
-          <Tags />
-        </Route>
 
         <Route path="/tags/add">
           <AddTagForm />
