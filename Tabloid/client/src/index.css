@@ -10,22 +10,59 @@ main {
     margin-left: -16px;
 }
 
-p {
-    line-height: 2rem;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.03ch;
+    line-height: 1.5;
 }
 
-button {
-    background: transparent;
-    border: transparent;
+h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.02ch;
+    text-align: left;
 }
 
-.x-button {
-    background:  hsla(211, 100%, 50%, 1);
-    margin-left: -15%;
-    border-radius: 6px;
-    height: 75%;
-    margin-top: 4.5px;
+h2 {
+    font-size: 1.25rem;
+    letter-spacing: 0.01ch;
+    text-align: left;
 }
+
+h3 {
+    font-size: 1rem;
+    letter-spacing: 0ch;
+    text-align: left;
+}
+
+h4 {
+    font-size: 0.85rem;
+    letter-spacing: 0.01ch;
+    text-align: left;
+}
+
+h5 {
+    font-size: 0.75rem;
+    letter-spacing: 0.05ch;
+    text-align: left;
+}
+
+h6 {
+    font-size: 0.65rem;
+    letter-spacing: 0.07ch;
+    text-align: left;
+}
+
+p, ol, ul, li {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    /* font-weight: 300; */
+    letter-spacing: 0.05ch;
+    line-height: 1.5;
+    -webkit-font-smoothing: auto;
+}
+
 
 .post p {
     white-space: pre-wrap;
@@ -81,4 +118,43 @@ button {
 
 .xOut:hover {
     color: hsla(0, 0%, 100%, 1);
+}
+
+/* >>>>>>>>>>>> */
+
+.dh-grid {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    width: 100%;
+}
+
+.dh-card {
+    /*  */
+}
+
+.dh-card a {
+    text-decoration: none;
+}
+
+:root {
+    --hover: hsl(200, 100%, 98%);
+}
+
+.dh-card .card-body {
+    background: hsl(0, 0%, 98%);
+    cursor: pointer;
+}
+
+.dh-card:hover .card-body {
+    background: var(--hover);
+    box-shadow: 1px 1px 1px -1px hsl(0deg 0% 0% / 50%);
+}
+
+.dh-card .card-body {
+    color: var(--gray-dark);
+}
+
+.dh-card:hover .card-body {
+    color: var(--purple);
 }

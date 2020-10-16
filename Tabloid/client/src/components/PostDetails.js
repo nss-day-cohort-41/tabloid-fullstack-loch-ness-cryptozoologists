@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import { Container, Row, Col } from 'reactstrap';
 import { PostContext } from "../providers/PostProvider";
 import { Link, useParams } from "react-router-dom";
 import Post from "./Post";
@@ -9,25 +10,29 @@ const PostDetails = () => {
     const { getPost } = useContext(PostContext);
     const { id } = useParams();
 
-
     useEffect(() => {
         getPost(id).then(setPost);
     }, []);
+
     if (!post) {
         return null;
     }
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-sm-12 col-lg-6">
+        <Container>
+            <h1>Posts</h1>
+            <Row className="justify-content-center">
+                <Col>
+                    <p><Link to={`/post/`}>&#60; Back</Link></p>
 
                     <Post key={post.id} post={post} />
-                    <strong>{post.title}</strong>
+                    {/* <strong>{post.title}</strong> */}
                     <Link to={`/comments/${id}`}>Comments</Link>
-                </div>
-            </div>
-        </div>
+
+                    <p><Link to={`/post/`}>&#60; Back</Link></p>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

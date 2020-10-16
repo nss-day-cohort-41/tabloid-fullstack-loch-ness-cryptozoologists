@@ -8,6 +8,7 @@ import CategoryList from "./CategoryList";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
 import PostDetails from "./PostDetails";
+import PostForm from "./PostForm";
 import CategoryAddForm from "./CategoryAddForm";
 import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
@@ -35,6 +36,10 @@ export default function ApplicationViews() {
 
         <Route path="/post" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post/edit/:id" exact>
+          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/add">
@@ -67,9 +72,7 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/comments/:id">
-
           <CommentList />
-
         </Route>
 
       </Switch>
