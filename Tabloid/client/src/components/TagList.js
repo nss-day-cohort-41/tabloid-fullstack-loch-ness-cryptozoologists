@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { TagContext } from "../providers/TagProvider";
-import { Badge } from "reactstrap";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import Tags from "./Tag";
 
 

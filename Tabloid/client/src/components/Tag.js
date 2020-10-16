@@ -3,7 +3,7 @@ import { Badge } from "reactstrap";
 import { Link } from "react-router-dom";
 
 
-const Tags = ({ tags, tagToBeDeleted, tagToBeEdited }) => {
+const Tags = ({ tags, tagToBeDeleted }) => {
 
 
 
