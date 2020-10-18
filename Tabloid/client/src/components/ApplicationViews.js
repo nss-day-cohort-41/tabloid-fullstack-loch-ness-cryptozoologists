@@ -14,7 +14,7 @@ import TagList from "./TagList";
 import EditTagForm from "./EditTagForm";
 import CommentList from "./CommentList";
 import AddComment from "./AddCommentForm";
-
+import DeleteComment from "./DeleteComment";
 
 
 export default function ApplicationViews() {
@@ -73,6 +73,9 @@ export default function ApplicationViews() {
         </Route>
         <Route path="/comments/add/:id" exact>
           {isLoggedIn ? <AddComment /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/comments/delete/:id" exact>
+          {isLoggedIn ? <DeleteComment /> : <Redirect to="/login" />}
         </Route>
 
 

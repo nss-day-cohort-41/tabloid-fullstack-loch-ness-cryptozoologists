@@ -17,17 +17,14 @@ namespace Tabloid.Controllers
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IUserProfileRepository _userProfileRepository;
-        //private readonly IPostRepository _postRepository;
 
         public CommentController(ICommentRepository commentRepository, IUserProfileRepository userProfileRepository)
         {
             _commentRepository = commentRepository;
             _userProfileRepository = userProfileRepository;
-            //_postRepository = postRepository;
         }
 
 
-        //this will show the whole list of comments for that specific post
         [HttpGet("GetAllCommentsByPost/{id}")]
         public IActionResult GetAllCommentsByPost(int id)
         {
@@ -38,8 +35,27 @@ namespace Tabloid.Controllers
         {
 
             _commentRepository.AddComment(comment);
-            //produces a status code of 201, which means userProfile object created sucessfully
             return CreatedAtAction("Get", new { id = comment.Id }, comment);
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _commentRepository.DeleteComment(id);
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+
+            Comment comment = _commentRepository.GetCommentById(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
 
         }
     }

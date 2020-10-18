@@ -2,20 +2,19 @@ import React, { useContext, useEffect } from "react";
 import { CommentContext } from "../providers/CommentProvider";
 import { PostContext } from "../providers/PostProvider";
 import { Col, Row, Button, Card, CardBody } from "reactstrap";
-//accesses the route parameters
 import { Link, useParams } from "react-router-dom";
 
 
 const CommentList = () => {
     const { comments, getAllCommentsForPost } = useContext(CommentContext);
     const { post, getPost } = useContext(PostContext);
-    // this will be the postId (once user clicks on view comments button on post details page--takes them to page to view comments)
     const { id } = useParams();
 
     useEffect(() => {
         getAllCommentsForPost(id);
         getPost(id);
     }, []);
+
 
     return (
         <>
@@ -37,6 +36,8 @@ const CommentList = () => {
                                             <p>{comment.content}</p>
                                             <h6>Date Posted</h6>
                                             <p>{comment.createDateTime}</p>
+                                            <p>Posted by: </p>
+                                            <Link to={`/comments/delete/${comment.id}`}>Delete</Link>
                                         </CardBody>
                                     )
                                 })}

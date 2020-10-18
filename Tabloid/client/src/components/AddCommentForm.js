@@ -7,13 +7,11 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 const AddComment = () => {
 
 
-    //id to use for postId (when user clicks the addcomment button on post details page)
     const { id } = useParams();
     const history = useHistory();
     const { addComment } = useContext(CommentContext);
     const [isLoading, setIsLoading] = useState(false)
 
-    //hard coding postId for now; need to use id from useparams as postId;
     const [newComment, setNewComment] = useState({
         postId: parseInt(id),
         userProfileId: 1,
@@ -22,14 +20,12 @@ const AddComment = () => {
     })
 
 
-    //handling input field for posting new comment
     const handleFieldChange = (e) => {
         const stateToChange = { ...newComment };
         stateToChange[e.target.id] = e.target.value;
         setNewComment(stateToChange);
     };
 
-    //add new comment function
     const addNewComment = () => {
         if (newComment.subject === "" || newComment.content === "") {
             alert("fill out both subject and content field");

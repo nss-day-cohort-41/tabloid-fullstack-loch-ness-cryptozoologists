@@ -6,6 +6,7 @@ export const CommentContext = React.createContext();
 export const CommentProvider = (props) => {
 
     const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState({});
 
     const getToken = () => firebase.auth().currentUser.getIdToken();
 
@@ -35,9 +36,32 @@ export const CommentProvider = (props) => {
     };
 
 
+    const deleteComment = (commentId) => {
+        return getToken().then((token) => {
+            fetch(`/api/comment/${commentId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        })
+    }
+
+    const getCommentById = (commentId) => {
+        return getToken().then((token) => {
+            fetch(`/api/comment/${commentId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json()).then(setComment)
+        })
+    };
+
+
     return (
 
-        <CommentContext.Provider value={{ comments, getAllCommentsForPost, addComment }}>
+        <CommentContext.Provider value={{ comments, getAllCommentsForPost, addComment, getCommentById, deleteComment }}>
             {props.children}
         </CommentContext.Provider>
     );
