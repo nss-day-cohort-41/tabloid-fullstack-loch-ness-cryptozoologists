@@ -3,6 +3,7 @@ import { PostContext } from "../providers/PostProvider";
 import { Link, useParams } from "react-router-dom";
 import Post from "./Post";
 import { CommentContext } from "../providers/CommentProvider";
+import { Button } from "reactstrap";
 
 const PostDetails = () => {
     const [post, setPost] = useState(null);
@@ -24,7 +25,10 @@ const PostDetails = () => {
 
                     <Post key={post.id} post={post} />
                     <strong>{post.title}</strong>
-                    <Link to={`/comments/${id}`}>Comments</Link>
+                    <br />
+                    <Link to={`/commentsbypost/${id}`}>View Comments</Link>
+                    <br />
+                    <Link to={`/comments/add/${id}`}> Add Comment</Link>
                 </div>
             </div>
         </div>

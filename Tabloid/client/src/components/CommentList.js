@@ -1,35 +1,55 @@
 import React, { useContext, useEffect } from "react";
 import { CommentContext } from "../providers/CommentProvider";
-import { ListGroup, ListGroupItem } from "reactstrap";
-import { useParams, Link } from "react-router-dom";
+import { PostContext } from "../providers/PostProvider";
+import { Col, Row, Button, Card, CardBody } from "reactstrap";
+//accesses the route parameters
+import { Link, useParams } from "react-router-dom";
+
 
 const CommentList = () => {
-    const { comments, getComments } = useContext(CommentContext);
+    const { comments, getAllCommentsForPost } = useContext(CommentContext);
+    const { post, getPost } = useContext(PostContext);
+    // this will be the postId (once user clicks on view comments button on post details page--takes them to page to view comments)
     const { id } = useParams();
 
     useEffect(() => {
-        getComments(id);
+        getAllCommentsForPost(id);
+        getPost(id);
     }, []);
-    console.log(id);
+
     return (
-        <div>
-            <h1>Comments</h1>
-            {comments.map((comment) => (
+        <>
 
-                <div key={comment.postId}>
-                    <ListGroup>
-                        <ListGroupItem>
-                            <p>{comment.subject}</p>
-                            <p>{comment.content}</p>
-                            <p>{comment.createDateTime}</p>
-                            <p>{comment.userProfileId}</p>
-                        </ListGroupItem>
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Row className="justify-content-center">
 
-                    </ListGroup>
-                </div>
-            ))}
-            <Link to={`/post/`}>Back to Posts</Link>
-        </div>
+                </Row>
+                {comments.length === 0 ? <p>This post has no comments assocaited.</p> :
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="cards-column">
+                                {comments && comments.map((comment) => {
+                                    return (
+                                        <CardBody>
+                                            <h6>Subject</h6>
+                                            <p>{comment.subject}</p>
+                                            <h6>Comment</h6>
+                                            <p>{comment.content}</p>
+                                            <h6>Date Posted</h6>
+                                            <p>{comment.createDateTime}</p>
+                                        </CardBody>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <Link to={`/post/${id}`}>
+                            Back
+                        </Link>
+                    </div>
+
+                }
+            </Col>
+        </>
     );
 };
 
