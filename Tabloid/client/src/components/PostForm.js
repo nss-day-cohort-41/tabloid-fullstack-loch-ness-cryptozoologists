@@ -13,9 +13,9 @@ export default function PostForm() {
   const [createDateTime, setCreateDateTime] = useState("");
   const [categoryId, setCategoryId] = useState(0);
   const { categories, getAllCategories } = useContext(CategoryContext);
-  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [userProfileId, setUserProfileId] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     getAllCategories()
