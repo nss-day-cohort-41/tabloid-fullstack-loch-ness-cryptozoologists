@@ -58,5 +58,17 @@ namespace Tabloid.Controllers
             return Ok(comment);
 
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Comment comment)
+        {
+
+            if (id != comment.Id)
+            {
+                return BadRequest();
+            }
+            _commentRepository.Update(comment);
+            return Ok();
+        }
     }
 }

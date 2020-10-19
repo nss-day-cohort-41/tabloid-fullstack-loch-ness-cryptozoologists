@@ -15,7 +15,7 @@ import EditTagForm from "./EditTagForm";
 import CommentList from "./CommentList";
 import AddComment from "./AddCommentForm";
 import DeleteComment from "./DeleteComment";
-
+import CommentEditForm from "./EditCommentForm";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -76,6 +76,9 @@ export default function ApplicationViews() {
         </Route>
         <Route path="/comments/delete/:id" exact>
           {isLoggedIn ? <DeleteComment /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/comment/:id/edit">
+          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login/" />}
         </Route>
 
 

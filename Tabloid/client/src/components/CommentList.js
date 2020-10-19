@@ -9,13 +9,17 @@ const CommentList = () => {
     const { comments, getAllCommentsForPost } = useContext(CommentContext);
     const { post, getPost } = useContext(PostContext);
     const { id } = useParams();
+    const { postId } = useParams();
 
     useEffect(() => {
         getAllCommentsForPost(id);
         getPost(id);
     }, []);
 
-
+    const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).firstName;
+    console.log(currentUser);
+    const test = comments.userProfile;
+    console.log(test);
     return (
         <>
 
@@ -36,8 +40,11 @@ const CommentList = () => {
                                             <p>{comment.content}</p>
                                             <h6>Date Posted</h6>
                                             <p>{comment.createDateTime}</p>
-                                            <p>Posted by: </p>
+                                            <h6>Posted by:</h6>
+                                            <p>{currentUser}</p>
                                             <Link to={`/comments/delete/${comment.id}`}>Delete</Link>
+                                            <br />
+                                            <Link to={`/comments/${comment.id}/edit`}>Edit</Link>
                                         </CardBody>
                                     )
                                 })}

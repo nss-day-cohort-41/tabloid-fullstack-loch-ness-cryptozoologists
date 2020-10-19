@@ -12,7 +12,7 @@ const DeleteComment = () => {
 
     const history = useHistory();
     const { comment, deleteComment, getCommentById } = useContext(CommentContext);
-    const { activeUser } = useContext(UserProfileContext);
+  
 
 
     useEffect(() => {

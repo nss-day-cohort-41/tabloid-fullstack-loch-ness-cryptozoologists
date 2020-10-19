@@ -9,5 +9,6 @@ namespace Tabloid.Repositories
         void AddComment(Comment comment);
         void DeleteComment(int id);
         Comment GetCommentById(int id);
+        void Update(Comment comment);
     }
 }
