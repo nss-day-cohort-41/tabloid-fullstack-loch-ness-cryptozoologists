@@ -23,7 +23,7 @@ const Post = ({ post }) => {
                 <Badge variant="info" pill>{post.category.name}</Badge>
                 {/* <CardText>Category: {post.category.name}</CardText> */}
                 <div className="mt-3">
-                    <Link to={`/post/edit/${post.id}`} className="btn btn-sm btn-secondary btn-info" title="Details">
+                    <Link to={`/post/edit/${post.id}`} className="btn btn-sm btn-secondary btn-info">
                        Edit
                     </Link>
                 </div>

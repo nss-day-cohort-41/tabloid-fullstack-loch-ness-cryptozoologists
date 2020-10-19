@@ -33,9 +33,9 @@ export default function PostEditForm() {
     setIsLoading(true);
     const editedPost = {
         id: post.id,
-        title: post.title,
-        content: post.content,
-        imageLocation: post.imageLocation,
+        title,
+        content,
+        imageLocation,
         createDateTime: post.createDateTime,
         publishDateTime: post.publishDateTime,
         isApproved: post.isApproved,
@@ -58,10 +58,8 @@ export default function PostEditForm() {
         editedPost.categoryId = post.categoryId
       }
 
-    updatePost(editedPost)
-      .then(() => {
-        history.push(`/post/${post.id}`)
-      });
+    updatePost(editedPost).then(() => history.push(`/post/${post.id}`));
+
   };
 
   useEffect(() => {
@@ -86,7 +84,7 @@ export default function PostEditForm() {
             id="title"
             defaultValue={post.title}
             onChange={e => setTitle(e.target.value)}
-            />
+          />
         </FormGroup>
 
         <FormGroup>
@@ -95,7 +93,7 @@ export default function PostEditForm() {
             id="content"
             defaultValue={post.content}
             onChange={e => setContent(e.target.value)}
-            />
+          />
         </FormGroup>
 
         <FormGroup>
@@ -104,7 +102,7 @@ export default function PostEditForm() {
             id="imageLocation"
             defaultValue={post.imageLocation}
             onChange={e => setImageLocation(e.target.value)}
-            />
+          />
         </FormGroup>
 
         <FormGroup>
