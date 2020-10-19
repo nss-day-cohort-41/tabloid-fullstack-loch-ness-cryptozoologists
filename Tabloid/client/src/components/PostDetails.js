@@ -7,11 +7,11 @@ import { CommentContext } from "../providers/CommentProvider";
 
 const PostDetails = () => {
     const [post, setPost] = useState(null);
-    const { getPost } = useContext(PostContext);
+    const { GetPublishedPostById } = useContext(PostContext);
     const { id } = useParams();
 
     useEffect(() => {
-        getPost(id).then(setPost);
+        GetPublishedPostById(id).then(setPost);
     }, []);
 
     if (!post) {

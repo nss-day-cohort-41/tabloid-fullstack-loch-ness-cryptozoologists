@@ -1,18 +1,20 @@
 import React, { useEffect, useContext, useState } from "react";
 import { PostContext } from "../providers/PostProvider";
-import { Card, CardImg, CardBody, CardTitle, CardText, Badge } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, CardText, Badge, Button } from 'reactstrap';
 import { Link, useParams } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
 const Post = ({ post }) => {
 
     const { posts, getAllPosts } = useContext(PostContext);
+    const { getAllUsers, getUserById } = useContext(UserProfileContext);
 
     useEffect(() => {
         getAllPosts();
     }, []);
 
     return (
+    <>
         <Card className="my-2">
             <CardBody>
                 <CardTitle><h4>{post.title}</h4></CardTitle>
@@ -27,6 +29,7 @@ const Post = ({ post }) => {
                 </div>
             </CardBody>
         </Card>
+    </>
     );
 };
 

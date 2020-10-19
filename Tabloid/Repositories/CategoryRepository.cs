@@ -14,7 +14,7 @@ namespace Tabloid.Repositories
    
     public class CategoryRepository : BaseRepository, ICategoryRepository
     {
-        public CategoryRepository(IConfiguration configuration) : base(configuration) { }
+        public CategoryRepository(IConfiguration config) : base(config) { }
        
         public List<Category> GetAllCategories()
         {
@@ -23,18 +23,20 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, [Name] FROM Category ORDER BY [Name] ASC ";
+                    cmd.CommandText = @"SELECT Id, [Name] FROM Category ORDER BY [Name] ASC ";
                     var reader = cmd.ExecuteReader();
+
                     var categories = new List<Category>();
+
                     while (reader.Read())
                     {
-                        var category = new Category()
+                        categories.Add(new Category()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name"))
-                        };
-                        categories.Add(category);
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name")
+                        });
                     }
+
                     reader.Close();
                     return categories;
                     
@@ -46,32 +48,32 @@ namespace Tabloid.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using(var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                    SELECT Id, [Name]
-                                    FROM Category
-                                    WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                        SELECT Id, Name
+                        FROM Category
+                        WHERE Id= @id
+                                       ";
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    Category category = null;
+                    if(reader.Read())
                     {
-                        Category category = new Category()
+                        category = new Category()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                            Id = id,
+                            Name = DbUtils.GetString(reader, "Name")
                         };
-                        reader.Close();
-                        return category;
                     }
-                    else
-                    {
-                        reader.Close();
-                        return null;
-                    }
+                    reader.Close();
+                    return category;
                 }
             }
         }
+
 
         public void AddCategory(Category category)
         {

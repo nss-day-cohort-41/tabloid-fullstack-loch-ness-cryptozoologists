@@ -202,7 +202,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void UpdatePost(Post post)
+        public void Update(Post post)
         {
             using (SqlConnection conn = Connection)
             {

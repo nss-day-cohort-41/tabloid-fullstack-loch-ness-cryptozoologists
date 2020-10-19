@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { Container, Row } from 'reactstrap';
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { PostContext } from "../providers/PostProvider";
+import { Container, Row } from 'reactstrap';
 import Post from "./Post";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const PostList = () => {
     const { posts, getAllPosts } = useContext(PostContext);
+    const history = useHistory();
 
     useEffect(() => {
         getAllPosts();
