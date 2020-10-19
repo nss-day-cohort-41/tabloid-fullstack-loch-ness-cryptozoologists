@@ -19,7 +19,8 @@ const Post = ({ post }) => {
             <CardBody>
                 <CardTitle><h4>{post.title}</h4></CardTitle>
                 <CardImg top className="rounded-0 mb-3" src={post.imageLocation} />
-                <CardText className="mb-0">Posted by: {post.userProfile.fullName} - <em>{post.userProfile.userType.name}</em></CardText>
+                <CardText className="mb-0">Posted by: {post.userProfile.fullName}</CardText>
+                {/* <CardText className="mb-0">- <em>{post.userProfileId.userType.name}</em></CardText> */}
                 <Badge variant="info" pill>{post.category.name}</Badge>
                 {/* <CardText>Category: {post.category.name}</CardText> */}
                 <div className="mt-3">

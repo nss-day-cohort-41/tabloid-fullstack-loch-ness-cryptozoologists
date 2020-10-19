@@ -6,7 +6,7 @@ import { useHistory, Link } from "react-router-dom";
 
 const PostList = () => {
     const { posts, getAllPosts } = useContext(PostContext);
-    const history = useHistory();
+    //const history = useHistory();
 
     useEffect(() => {
         getAllPosts();

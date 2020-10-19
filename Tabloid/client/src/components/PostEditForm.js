@@ -1,47 +1,68 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PostContext } from "../providers/PostProvider";
-import { useHistory, Link, useParams } from "react-router-dom";
 import { CategoryContext } from "../providers/CategoryProvider";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory, Link, useParams } from "react-router-dom";
 export default function PostEditForm() {
-  const { updatePost, GetPublishedPostById } = useContext(PostContext);
-  const { EditPost, getSinglePost } = useContext(PostContext);
-  const [post, setPost] = useState();
+
+  const { getPost, updatePost, getById, post } = useContext(PostContext);
+  //const { EditPost, getSinglePost } = useContext(PostContext);
+  const [ editedPost, setEditedPost] = useState();
     const { categories, getAllCategories } = useContext(CategoryContext);
     const [userProfileId, setUserProfileId] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [imageLocation, setImageLocation] = useState("");
     const [createDateTime, setCreateDateTime] = useState("");
-    const [categoryId, setCategoryId] = useState(0);
-  const { postId } = useParams();
+    const [categoryId, setCategoryId] = useState();
+
+
+  const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
+  useEffect(() => {
+      getById(parseInt(id));
+  }, [])
+
   const handleFieldChange = (e) => {
-    const stateToChange = { ...post };
+    const stateToChange = { ...editedPost };
     stateToChange[e.target.id] = e.target.value;
-    setPost(stateToChange);
+    setEditedPost(stateToChange);
+  }
+
+  const handleChange = (e) => {
+    setCategoryId(e.target.value);
   }
 
   useEffect(() => {
     getAllCategories()
   }, []);
 
+  useEffect(() => {
+    setEditedPost(post)
+  }, [post]);
+
   const submitForm = (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     const editedPost = {
         id: post.id,
-        title,
-        content,
-        imageLocation,
-        createDateTime: post.createDateTime,
-        publishDateTime: post.publishDateTime,
-        isApproved: post.isApproved,
+        title: editedPost.title,
+        content: editedPost.content,
+        imageLocation: editedPost.imageLocation,
+        createDateTime: editedPost.createDateTime,
+        publishDateTime: editedPost.publishDateTime,
+        isApproved: editedPost.isApproved,
         categoryId,
-        userProfileId: post.userProfileId
+        userProfileId: editedPost.userProfileId
     }
+
+    const parseMyCats = parseInt(categoryId);
+    editedPost.categoryId = parseMyCats;
+    updatePost(editedPost.id, editedPost);
+    history.push(`/post/edit/${id}`);
 
     editedPost.categoryId = JSON.parse(editedPost.categoryId)
 
@@ -63,11 +84,8 @@ export default function PostEditForm() {
   };
 
   useEffect(() => {
-  GetPublishedPostById(postId).then((res)=>{
-      setPost(res)
-      setIsLoading(false);
-    });
-  }, []);
+    getById(parseInt(id));
+  }, [])
 
   if (!post) {
     return null;
@@ -82,8 +100,8 @@ export default function PostEditForm() {
           <Label for="title">Title</Label>
           <Input type="text"
             id="title"
-            defaultValue={post.title}
-            onChange={e => setTitle(e.target.value)}
+            defaultValue={editedPost.title}
+            onChange={handleFieldChange}
           />
         </FormGroup>
 
@@ -91,8 +109,8 @@ export default function PostEditForm() {
           <Label for="content">Content</Label>
           <Input type="textarea" rows="4"
             id="content"
-            defaultValue={post.content}
-            onChange={e => setContent(e.target.value)}
+            defaultValue={editedPost.content}
+            onChange={handleFieldChange}
           />
         </FormGroup>
 
@@ -100,21 +118,40 @@ export default function PostEditForm() {
           <Label for="imageLocation">Image</Label>
           <Input type="text"
             id="imageLocation"
-            defaultValue={post.imageLocation}
-            onChange={e => setImageLocation(e.target.value)}
+            defaultValue={editedPost.imageLocation}
+            onChange={handleFieldChange}
           />
         </FormGroup>
 
         <FormGroup>
           <Label for="categoryId">Category</Label>
-          <select defaultValue=""
+          <select
             id="categoryId"
-            onChange={(e) => setCategoryId(e.target.value)}>
+            onChange={handleChange}>
             {categories.map(e => (
-              <option key={e.id} value={e.id}>{e.name}</option>
+              categories.id === post.categoryId ? // is it true? then do next...
+              <option selected value={category.id}>
+                  {category.name}
+              </option> :  // !true then do this
+              <option value={category.id}>
+                  {category.name}
+              </option>
             ))}
           </select>
         </FormGroup>
+
+        {/* PUBLISH DATE ~~~~~~~~~~ */}
+        {/* <FormGroup>
+          <Label for="content">Publish Date</Label>
+          <Input
+              type="datetime-local"
+              id="publishDateTime"
+              required
+              defaultValue={editedPost.publishDateTime}
+              name="publishDateTime"
+              onChange={handleFieldChange}
+          />
+      </FormGroup> */}
 
         {/* SUBMIT */}
         <FormGroup className="mt-5">

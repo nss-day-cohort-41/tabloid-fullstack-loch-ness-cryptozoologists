@@ -335,5 +335,10 @@ namespace Tabloid.Repositories
                 return $"Read time is: {time} minutes";
             }
         }
+
+        public List<Post> GetAllApprovedPosts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
