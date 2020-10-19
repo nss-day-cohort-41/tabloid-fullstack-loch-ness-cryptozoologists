@@ -13,6 +13,7 @@ import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
 import TagList from "./TagList";
 import EditTagForm from "./EditTagForm";
+import DeleteCategory from "./DeleteCategory";
 
 
 export default function ApplicationViews() {
@@ -64,6 +65,10 @@ export default function ApplicationViews() {
 
         <Route path="/categories/edit/:id" exact>
           <CategoryEditForm />
+        </Route>
+
+        <Route path="/categories/delete/:id" exact>
+          <DeleteCategory />
         </Route>
 
         <Route path="/comments/:id">

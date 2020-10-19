@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { CategoryContext } from "../providers/CategoryProvider";
 import { ListGroup, ListGroupItem, Button } from "reactstrap";
 const CategoryList = () => {
-    const { categories, getAllCategories, deleteCategory } = useContext(CategoryContext);
+    const { categories, getAllCategories } = useContext(CategoryContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -11,9 +11,10 @@ const CategoryList = () => {
     }, []);
 
     // getting the category by its id and deleting it
-    const categoryToBeDeleted = (id) => {
-        deleteCategory(id)
-    }
+    // const categoryToBeDeleted = (id) => {
+    //     deleteCategory(id)
+
+    // }
 
 
 
@@ -44,7 +45,8 @@ const CategoryList = () => {
                                 type="button"
                                 color="secondary"
                                 className="float-left"
-                                onClick={() => categoryToBeDeleted(category.id)} >
+                                onClick={() =>
+                                    history.push(`/categories/delete/${category.id}`)} >
                                 Delete
                                 </Button>
                         </ListGroup>
