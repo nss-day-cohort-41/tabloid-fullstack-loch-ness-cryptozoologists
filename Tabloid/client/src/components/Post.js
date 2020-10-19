@@ -6,6 +6,12 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 
 const Post = ({ post }) => {
 
+    const { posts, getAllPosts } = useContext(PostContext);
+
+    useEffect(() => {
+        getAllPosts();
+    }, []);
+
     return (
         <Card className="my-2">
             <CardBody>

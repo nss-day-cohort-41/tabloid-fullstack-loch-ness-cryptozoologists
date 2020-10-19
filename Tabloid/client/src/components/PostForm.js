@@ -5,16 +5,16 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import { CategoryContext } from "../providers/CategoryProvider";
 export default function PostForm() {
   const { getPost, updatePost } = useContext(PostContext);
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState({ id: "", title: "", content: "", imageLocation: "", createDateTime: "", categoryId: null, userProfileId: null });
   const { postId } = useParams();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [imageLocation, setImageLocation] = useState("");
-  const [createDateTime, setCreateDateTime] = useState("");
-  const [categoryId, setCategoryId] = useState(0);
-  const { categories, getAllCategories } = useContext(CategoryContext);
+   /*  const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [imageLocation, setImageLocation] = useState("");
+    const [createDateTime, setCreateDateTime] = useState(""); */
+    //const [categoryId, setCategoryId] = useState(0);
+  //const { categories, getAllCategories } = useContext(CategoryContext);
+  //const [userProfileId, setUserProfileId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [userProfileId, setUserProfileId] = useState("");
   const history = useHistory();
 
   useEffect(() => {
