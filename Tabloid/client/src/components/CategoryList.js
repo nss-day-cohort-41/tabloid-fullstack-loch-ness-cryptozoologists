@@ -10,7 +10,7 @@ const CategoryList = () => {
         getAllCategories();
     }, []);
 
-    // getting the category by its id and deleting it
+    //getting the category by its id and deleting it
     // const categoryToBeDeleted = (id) => {
     //     deleteCategory(id)
 

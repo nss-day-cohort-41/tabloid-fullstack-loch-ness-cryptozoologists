@@ -34,12 +34,7 @@ const DeleteCategory = () => {
         <>
             <div>
 
-                <h3>Are you sure you want to delete this category? </h3>
-                <p>Any Post using Category <i>{category.name}</i>will change to other</p>
 
-                <Button type="button" color="secondary" onClick={handleDelete}>
-                    Delete
-                </Button>
 
                 <Button type="button" id={category.id} color="secondary" onClick={() => history.goBack()}>
                     {'Cancel'}
