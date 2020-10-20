@@ -41,11 +41,10 @@ namespace Tabloid.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCategory(Category category)
+        public IActionResult Post(Category category)
         {
             _categoryRepository.AddCategory(category);
             return CreatedAtAction("Get", new { id = category.Id }, category);
-
         }
        
         [HttpPut("{id}")]
@@ -55,16 +54,16 @@ namespace Tabloid.Controllers
             {
                 return BadRequest();
             }
-            _categoryRepository.Update(category);
+            _categoryRepository.UpdateCategory(category);
             return NoContent();
         }
 
-      [HttpDelete("{id}")]
-      public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
         {
-            _categoryRepository.Delete(id);
-         return NoContent();
+            _categoryRepository.DeleteCategory(id);
+            return NoContent();
         }
-       
+
     }
 }

@@ -48,28 +48,30 @@ namespace Tabloid.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                using(var cmd = conn.CreateCommand())
+                using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, Name
-                        FROM Category
-                        WHERE Id= @id
-                                       ";
-                    DbUtils.AddParameter(cmd, "@id", id);
+                        SELECT Id, name
+                        FROM Category 
+                        WHERE Id = @id";
 
+                    cmd.Parameters.AddWithValue("@id", id);
                     var reader = cmd.ExecuteReader();
 
-                    Category category = null;
-                    if(reader.Read())
+                    if (reader.Read())
                     {
-                        category = new Category()
+                        Category category = new Category()
                         {
-                            Id = id,
-                            Name = DbUtils.GetString(reader, "Name")
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
                         };
+
+                        reader.Close();
+                        return category;
+
                     }
                     reader.Close();
-                    return category;
+                    return null;
                 }
             }
         }
@@ -95,7 +97,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void Update(Category category)
+        public void UpdateCategory(Category category)
         {
             using (var conn = Connection)
             {
@@ -115,7 +117,7 @@ namespace Tabloid.Repositories
                 }
             }
         }
-        public void Delete(int id)
+        public void DeleteCategory(int id)
         {
             using (var conn = Connection)
             {
