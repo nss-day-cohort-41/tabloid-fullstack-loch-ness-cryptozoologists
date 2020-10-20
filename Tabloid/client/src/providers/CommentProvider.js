@@ -4,10 +4,7 @@ import * as firebase from "firebase/app";
 export const CommentContext = React.createContext();
 
 export const CommentProvider = (props) => {
-
     const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState({});
-
     const getToken = () => firebase.auth().currentUser.getIdToken();
 
     const getAllCommentsForPost = (postId) => {
@@ -20,7 +17,6 @@ export const CommentProvider = (props) => {
             }).then(resp => resp.json()).then(setComments);
         })
     };
-
 
     const addComment = (newComment) => {
         return getToken().then((token) => {
@@ -35,7 +31,6 @@ export const CommentProvider = (props) => {
         })
     };
 
-
     const deleteComment = (commentId) => {
         return getToken().then((token) => {
             fetch(`/api/comment/${commentId}`, {
@@ -48,14 +43,14 @@ export const CommentProvider = (props) => {
     }
 
     const getCommentById = (commentId) => {
-        return getToken().then((token) => {
+        return getToken().then((token) => 
             fetch(`/api/comment/${commentId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json()).then(setComment)
-        })
+            }).then(resp => resp.json())
+        )
     };
 
     const editComment = (comment) => {
@@ -71,10 +66,9 @@ export const CommentProvider = (props) => {
         })
     }
 
-
     return (
-
-        <CommentContext.Provider value={{ comments, comment, getAllCommentsForPost, addComment, getCommentById, deleteComment, editComment }}>
+        <CommentContext.Provider value={{ comments,  getAllCommentsForPost, addComment,
+         getCommentById, deleteComment, editComment }}>
             {props.children}
         </CommentContext.Provider>
     );

@@ -17,14 +17,10 @@ const CommentList = () => {
     }, []);
 
     const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).firstName;
-    console.log(currentUser);
-    const test = comments.userProfile;
-    console.log(test);
+    
     return (
-        <>
-
-            
-             
+        <>           
+            <Link to={`/post/${id}`}>Back to Post</Link> 
                 {comments.length === 0 ? <p>This post has no comments assocaited.</p> :
                     <div className="container">
                         <div>
@@ -38,26 +34,21 @@ const CommentList = () => {
                                             <CardTitle><strong>Comment:</strong></CardTitle>
                                             <CardText>{comment.content}</CardText>
                                             <CardTitle><strong>Date Posted:</strong></CardTitle>
-                                            <CardText>{comment.createDateTime}</CardText>
+                                            <CardText>{comment.createDateTime.substring(0, 10)}</CardText>
                                             <CardTitle><strong>Posted by:</strong></CardTitle>
-                                            <CardText>{currentUser}</CardText>
+                                            <CardText>{comment.userProfile.displayName}</CardText> 
                                             <Link to={`/comments/delete/${comment.id}`}><Button>Delete</Button></Link>
                                             <br />
                                             <br />
-                                            <Link to={`/comments/edit/${comment.id}`}>Edit</Link>
+                                            <Link to={`/comments/edit/${comment.id}`}><Button>Edit</Button></Link>
                                         </CardBody>
                                         </Card>
                                     )
                                 })}
                             </div>
                         </div>
-                        <Link to={`/post/${id}`}>
-                           <Button>Back</Button>
-                        </Link>
                     </div>
-
                 }
-            
         </>
     );
 };
