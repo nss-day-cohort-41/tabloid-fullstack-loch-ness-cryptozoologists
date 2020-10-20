@@ -42,6 +42,9 @@ export default function Header() {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/userprofile">Profiles</NavLink>
+                </NavItem>
 
                 {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/categories/add">Add Category</NavLink>
@@ -51,6 +54,7 @@ export default function Header() {
                 <NavItem>
                   <NavLink tag={RRNavLink} onClick={logout} to="/login">Logout</NavLink>
                 </NavItem>
+                
 
               </>
             }

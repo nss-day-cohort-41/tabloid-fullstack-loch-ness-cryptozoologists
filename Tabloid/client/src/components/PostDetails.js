@@ -4,6 +4,7 @@ import { PostContext } from "../providers/PostProvider";
 import { Link, useParams } from "react-router-dom";
 import Post from "./Post";
 import { CommentContext } from "../providers/CommentProvider";
+import { Button } from "reactstrap";
 
 const PostDetails = () => {
     const [post, setPost] = useState(null);
