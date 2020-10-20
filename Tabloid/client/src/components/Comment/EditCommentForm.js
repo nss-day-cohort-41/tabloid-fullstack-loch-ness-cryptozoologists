@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 
-import { CommentContext } from "../providers/CommentProvider";
+import { CommentContext } from "../../providers/CommentProvider";
 import { useParams, useHistory, Link } from 'react-router-dom';
 
 const CommentEditForm = () => {
@@ -11,7 +11,7 @@ const CommentEditForm = () => {
     
 
     const history = useHistory();
-    const [comment, setComment] = useState({ userProfileId: "", postId: "", subject: "", content: "", createDateTime: "" });
+    const [comment, setComment] = useState({userProfileId: 1, postId: "", subject: "", content: "", createDateTime: "" });
     const [updatedComment, setUpdatedComment] = useState();
     
     useEffect(() => {
@@ -53,11 +53,6 @@ const CommentEditForm = () => {
                 <Card className="col-sm-12 col-lg-6">
                     <CardBody>
                         <Form>
-                            <FormGroup>
-                                <Label for="postId">Edit Comment</Label>
-                                <Input type="hidden" id="postId"
-                                    value={comment.postId} />
-                            </FormGroup>
                             <FormGroup>
                                 <Label for="subject">Subject</Label>
                                 <Input id="subject"

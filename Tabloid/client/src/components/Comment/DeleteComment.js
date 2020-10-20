@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { CommentContext } from "../providers/CommentProvider";
+import { CommentContext } from "../../providers/CommentProvider";
 import { Card, CardBody, Button } from "reactstrap";
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 const DeleteComment = () => {
     // let userId = sessionStorage.userProfileId

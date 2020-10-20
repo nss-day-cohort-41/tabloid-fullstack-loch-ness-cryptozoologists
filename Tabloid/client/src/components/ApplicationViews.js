@@ -12,10 +12,11 @@ import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
 import TagList from "./TagList";
 import EditTagForm from "./EditTagForm";
-import CommentList from "./CommentList";
-import AddComment from "./AddCommentForm";
-import DeleteComment from "./DeleteComment";
-import CommentEditForm from "./EditCommentForm";
+import CommentList from "../components/Comment/CommentList";
+import AddComment from "../components/Comment/AddCommentForm";
+import DeleteComment from "../components/Comment/DeleteComment";
+import CommentEditForm from "../components/Comment/EditCommentForm";
+import UserProfileList from "./UserProfileList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -77,8 +78,11 @@ export default function ApplicationViews() {
         <Route path="/comments/delete/:id" exact>
           {isLoggedIn ? <DeleteComment /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/comment/:id/edit">
+        <Route path="/comments/:commentId(\d+)/edit">
           {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login/" />}
+        </Route>
+        <Route path="/userprofile">
+          <UserProfileList />
         </Route>
 
 

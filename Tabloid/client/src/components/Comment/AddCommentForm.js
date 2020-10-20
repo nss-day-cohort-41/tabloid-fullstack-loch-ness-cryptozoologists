@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { CommentContext } from "../providers/CommentProvider";
+import { CommentContext } from "../../providers/CommentProvider";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 const AddComment = () => {

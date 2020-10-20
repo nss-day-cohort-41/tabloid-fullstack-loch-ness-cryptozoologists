@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -51,6 +52,34 @@ namespace Tabloid.Repositories
                     reader.Close();
 
                     return userProfile;
+                }
+            }
+        }
+
+        public List<UserProfile> ListAllUserProfiles()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, DisplayName, FirstName, LastName FROM UserProfile ORDER BY DisplayName ASC ";
+                    var reader = cmd.ExecuteReader();
+                    var profiles = new List<UserProfile>();
+                    while (reader.Read())
+                    {
+                        var profile = new UserProfile()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName"))
+                        };
+                        profiles.Add(profile);
+                    }
+                    reader.Close();
+                    return profiles;
+
                 }
             }
         }

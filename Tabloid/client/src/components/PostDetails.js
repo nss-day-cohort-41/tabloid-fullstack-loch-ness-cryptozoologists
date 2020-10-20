@@ -26,9 +26,9 @@ const PostDetails = () => {
                     <Post key={post.id} post={post} />
                     <strong>{post.title}</strong>
                     <br />
-                    <Link to={`/commentsbypost/${id}`}>View Comments</Link>
+                    <Link to={`/commentsbypost/${id}`}><Button variant="dark">View Comments</Button></Link>
                     <br />
-                    <Link to={`/comments/add/${id}`}> Add Comment</Link>
+                    <Link to={`/comments/add/${id}`}><Button>Add Comment</Button></Link>
                 </div>
             </div>
         </div>
