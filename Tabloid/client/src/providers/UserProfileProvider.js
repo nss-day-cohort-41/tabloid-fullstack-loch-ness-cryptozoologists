@@ -16,6 +16,7 @@ export function UserProfileProvider(props) {
 
   const [userProfiles, setUserProfiles] = useState([]);
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((u) => {
       setIsFirebaseReady(true);
@@ -104,7 +105,7 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json())
           .then(setUserProfiles));
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, userProfiles, listAllUserProfiles }}>
+    <UserProfileContext.Provider value={{ users, oneUser, isLoggedIn, login, logout, register, getToken, userProfiles, listAllUserProfiles, getAllUsers, getUserById }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}

@@ -27,13 +27,6 @@ namespace Tabloid.Controllers
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_userProfileRepository.GetAllUsers());
-        }
-
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
