@@ -44,6 +44,7 @@ namespace Tabloid.Controllers
         public IActionResult AddCategory(Category category)
         {
             _categoryRepository.AddCategory(category);
+            //retrun this category at this id
             return CreatedAtAction("Get", new { id = category.Id }, category);
 
         }

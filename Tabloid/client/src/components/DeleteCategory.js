@@ -17,9 +17,14 @@ const DeleteCategory = () => {
 
     const handleDelete = (evt) => {
         evt.preventDefault();
-        //call get all post
-
+        //call getAllPosts
+        const getAllPosts(post.categoryId);
         //loop through my post to see if the categoryId = post.categoryId
+        forEach(categoryId in post.categoryId)
+        {
+            getAllPosts
+        }
+
         if (categoryId === post.categoryId) {
             return "Note, you can not delete categories associated with post(s). Please remove the post(s) from this category to delete."
         } else {
