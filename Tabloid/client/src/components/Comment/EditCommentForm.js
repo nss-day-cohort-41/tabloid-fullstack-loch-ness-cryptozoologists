@@ -1,95 +1,93 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
-
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-const CommentEditForm = () => {
+const EditComment = () => {
+    let userId = sessionStorage.userProfileId
 
-    const { commentId, postId } = useParams();
-    const { getCommentById, addComment, editComment } = useContext(CommentContext);
-    
-
+    const { id } = useParams();
     const history = useHistory();
-    const [comment, setComment] = useState({userProfileId: 1, postId: "", subject: "", content: "", createDateTime: "" });
-    const [updatedComment, setUpdatedComment] = useState();
-    
+
+    const { editComment, comment, getCommentById } = useContext(CommentContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [updatedComment, setUpdatedComment] = useState({})
+
+
     useEffect(() => {
-        getCommentById(commentId).then(setComment);
-    }, []);
+        getCommentById(id)
 
 
 
-    const submit = (evt) => {
-        evt.preventDefault();
-        const updatedComment =
-        {
-            id: comment.id,
-            userProfileId: comment.userProfileId,
-            postId: comment.postId,
-            subject: comment.subject,
-            content: comment.content,
-            createDateTime: comment.createDateTime
-        }
 
+    }, [])
 
-        editComment(updatedComment).then(() =>
-            history.push(`/posts/${comment.postId}/comments`))
-
+    const handleEditFieldChange = (e) => {
+        const stateToChange = { ...updatedComment }
+        stateToChange[e.target.id] = e.target.value;
+        setUpdatedComment(stateToChange)
     }
 
-    const handleFieldChange = evt => {
-        const stateToChange = { ...comment }
-        stateToChange[evt.target.id] = evt.target.value
-        setComment(stateToChange)
-    
-    }
+    // useEffect(() => {
+    //     setUpdatedComment(comment)
 
-  
+    //      {
+
+    //         history.push("/post");
+    //     }
+    // }, [comment])
+
+
+    const editAComment = (e) => {
+       
+        setIsLoading(true);
+        editComment(updatedComment);
+        setIsLoading(false);
+        history.push(`/comments/details/${id}`);
+    }
 
     return (
-        <div className="container pt-4">
-            <div className="row justify-content-center">
-                <Card className="col-sm-12 col-lg-6">
-                    <CardBody>
-                        <Form>
-                            <FormGroup>
-                                <Label for="subject">Subject</Label>
-                                <Input id="subject"
-                                    defaultValue={comment.subject}
-                                    onChange={handleFieldChange}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="content">Content</Label>
-                                <Input
-                                    className="contentTextArea"
-                                    type="textarea"
-                                    style={{ height: 200 }}
-                                    id="content"
-                                    defaultValue={comment.content}
-                                    onChange={handleFieldChange}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                               
-                                <Input
-                                    id="createDateTime"
-                                    type="hidden"
-                                    defaultValue={comment.createDateTime}
-                                />
-                            </FormGroup>
-                        </Form>
-                         <Button color="info" onClick={submit} className="commentButton">
-                            Submit
-                                </Button> 
-                        <Link to={`/posts/${postId}/comments`}>
-                            <Button color="secondary" className="commentButton">Back</Button>
-                        </Link>
-                    </CardBody>
-                </Card>
-            </div>
-        </div>
+        <>
+            {updatedComment &&
+                <Form>
+                    <h3> Edit A Comment </h3>
+                    <FormGroup>
+                        <Label htmlFor="subject"><strong>Subject</strong></Label>
+                        <Input className="p-2 bd-highlight justify-content-center"
+                            defaultValue={updatedComment.subject}
+                            onChange={handleEditFieldChange}
+                            type="text"
+                            name="subject"
+                            id="subject"
+
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="content"><strong>Comment</strong></Label>
+                        <Input className="p-2 bd-highlight justify-content-center"
+                            defaultValue={updatedComment.content}
+                            onChange={handleEditFieldChange}
+                            type="textarea"
+                            name="content"
+                            id="content"
+                        />
+                    </FormGroup>
+                </Form >
+
+            }
+
+            <Button block className="editComment" type="button"  isLoading={isLoading} onClick={editAComment}>
+                {'Save Edited Comment'}
+            </Button>
+            <Button block className="cancelEdit" type="button"  isLoading={isLoading} onClick={() => history.goBack()}>
+                {'Cancel'}
+            </Button>
+
+
+
+        </>
     )
-}
-export default CommentEditForm;
+};
+
+export default EditComment;

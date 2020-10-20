@@ -154,7 +154,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void Update(Comment comment)
+        public void UpdateComment(Comment comment)
         {
             using (var conn = Connection)
             {
@@ -163,20 +163,18 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        UPDATE Comment
-                                        SET PostId = @PostId,
-                                            UserProfileId = @UserProfileId,
-                                            Subject = @Subject,
-                                            Content = @Content,
-                                            CreateDateTime = @CreateDateTime
-                                        WHERE Id = @Id;";
+                            UPDATE Comment
+                            SET  
+                                UserProfileId = @userProfileId, 
+                                Subject= @subject, 
+                                Content = @Content
+                            WHERE Id = @id";
 
-                    DbUtils.AddParameter(cmd, "@PostId", comment.PostId);
-                    DbUtils.AddParameter(cmd, "@UserProfileId", comment.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@Subject", comment.Subject);
-                    DbUtils.AddParameter(cmd, "@Content", comment.Content);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", comment.CreateDateTime);
-                    DbUtils.AddParameter(cmd, "@Id", comment.Id);
+                    //cmd.Parameters.AddWithValue("@postId", comment.PostId);
+                    cmd.Parameters.AddWithValue("@userProfileId", comment.UserProfileId);
+                    cmd.Parameters.AddWithValue("@subject", comment.Subject);
+                    cmd.Parameters.AddWithValue("@content", comment.Content);
+                    cmd.Parameters.AddWithValue("@id", comment.Id);
 
                     cmd.ExecuteNonQuery();
                 }

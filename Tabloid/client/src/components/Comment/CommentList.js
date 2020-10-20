@@ -44,7 +44,7 @@ const CommentList = () => {
                                             <Link to={`/comments/delete/${comment.id}`}><Button>Delete</Button></Link>
                                             <br />
                                             <br />
-                                            <Link to={`/comments/${comment.id}/edit`}><Button>Edit</Button></Link>
+                                            <Link to={`/comments/edit/${comment.id}`}>Edit</Link>
                                         </CardBody>
                                         </Card>
                                     )

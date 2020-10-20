@@ -15,7 +15,7 @@ import EditTagForm from "./EditTagForm";
 import CommentList from "../components/Comment/CommentList";
 import AddComment from "../components/Comment/AddCommentForm";
 import DeleteComment from "../components/Comment/DeleteComment";
-import CommentEditForm from "../components/Comment/EditCommentForm";
+import EditComment from "../components/Comment/EditCommentForm";
 import UserProfileList from "./UserProfileList";
 
 export default function ApplicationViews() {
@@ -78,8 +78,8 @@ export default function ApplicationViews() {
         <Route path="/comments/delete/:id" exact>
           {isLoggedIn ? <DeleteComment /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/comments/:commentId(\d+)/edit">
-          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login/" />}
+        <Route path="/comments/edit/:id" exact>
+           <EditComment />
         </Route>
         <Route path="/userprofile">
           <UserProfileList />

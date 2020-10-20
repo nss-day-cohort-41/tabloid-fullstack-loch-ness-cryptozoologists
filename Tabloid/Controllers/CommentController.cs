@@ -62,13 +62,12 @@ namespace Tabloid.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Comment comment)
         {
-
             if (id != comment.Id)
             {
                 return BadRequest();
             }
-            _commentRepository.Update(comment);
-            return Ok();
+            _commentRepository.UpdateComment(comment);
+            return NoContent();
         }
     }
 }
