@@ -7,6 +7,7 @@ namespace Tabloid.Repositories
     {
         void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
+        List<UserProfile> ListAllUserProfiles();
         List<UserProfile> GetAllUsers();
         UserProfile GetById(int id);
     }
