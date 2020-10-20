@@ -71,11 +71,14 @@ export default function ApplicationViews() {
           <CategoryEditForm />
         </Route>
 
+        
+
+
         <Route path="/categories/delete/:id" exact>
           <DeleteCategory />
         </Route>
 
-        {/* <Route path="/comments/:id"> */}
+        
         <Route path="/commentsbypost/:id" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
@@ -88,12 +91,10 @@ export default function ApplicationViews() {
         <Route path="/comments/edit/:id" exact>
           <EditComment />
         </Route>
+        
         <Route path="/userprofile">
           <UserProfileList />
         </Route>
-
-
-
       </Switch>
     </main >
   );

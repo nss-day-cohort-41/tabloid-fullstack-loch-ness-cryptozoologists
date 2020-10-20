@@ -5,54 +5,34 @@ import { CommentContext } from "../../providers/CommentProvider";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 const EditComment = () => {
-    let userId = sessionStorage.userProfileId
-
-    const { id } = useParams();
+    const { id } = useParams(); //Url parameters for commentId
     const history = useHistory();
-
-    const { editComment, comment, getCommentById } = useContext(CommentContext);
+    const { editComment, getCommentById } = useContext(CommentContext); //Pulling from Context
     const [isLoading, setIsLoading] = useState(false);
-    const [updatedComment, setUpdatedComment] = useState({})
+    const [updatedComment, setUpdatedComment] = useState({}) //Setting new comment after updated
 
-
-    useEffect(() => {
-        getCommentById(id)
-
-
-
-
+    useEffect(() => { //Every time the page is loaded essentially
+        getCommentById(id).then(setUpdatedComment); //Get the ID then populate the fields with the existing values
     }, [])
 
-    const handleEditFieldChange = (e) => {
+    const handleEditFieldChange = (e) => { //Affordance for when values are updated in the input
         const stateToChange = { ...updatedComment }
         stateToChange[e.target.id] = e.target.value;
         setUpdatedComment(stateToChange)
     }
 
-    // useEffect(() => {
-    //     setUpdatedComment(comment)
-
-    //      {
-
-    //         history.push("/post");
-    //     }
-    // }, [comment])
-
-
-    const editAComment = (e) => {
-       
+    const editAComment = (e) => {   
         setIsLoading(true);
         editComment(updatedComment);
         setIsLoading(false);
-        history.push(`/comments/details/${id}`);
+        history.goBack();
     }
 
     return (
-        <>
-            {updatedComment &&
+        <>         
                 <Form>
                     <h3> Edit A Comment </h3>
-                    <FormGroup>
+                    <FormGroup>                    
                         <Label htmlFor="subject"><strong>Subject</strong></Label>
                         <Input className="p-2 bd-highlight justify-content-center"
                             defaultValue={updatedComment.subject}
@@ -60,7 +40,6 @@ const EditComment = () => {
                             type="text"
                             name="subject"
                             id="subject"
-
                         />
                     </FormGroup>
                     <FormGroup>
@@ -74,20 +53,21 @@ const EditComment = () => {
                         />
                     </FormGroup>
                 </Form >
-
-            }
-
-            <Button block className="editComment" type="button"  isLoading={isLoading} onClick={editAComment}>
-                {'Save Edited Comment'}
+            <Button block className="editComment" type="button" color="success" isLoading={isLoading} 
+                         onClick={editAComment}>
+                {'Submit'}
             </Button>
-            <Button block className="cancelEdit" type="button"  isLoading={isLoading} onClick={() => history.goBack()}>
+            <Button block className="cancelEdit" type="button" color="danger"  isLoading={isLoading} 
+                         onClick={() => history.goBack()}>
                 {'Cancel'}
             </Button>
-
-
-
         </>
     )
 };
 
 export default EditComment;
+
+//Step one: read
+//Step two: comment
+//Step three: format
+//Step four: understand

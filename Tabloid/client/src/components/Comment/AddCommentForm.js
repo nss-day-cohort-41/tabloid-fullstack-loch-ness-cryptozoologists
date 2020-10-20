@@ -6,19 +6,16 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 const AddComment = () => {
 
-
     const { id } = useParams();
     const history = useHistory();
     const { addComment } = useContext(CommentContext);
     const [isLoading, setIsLoading] = useState(false)
-
     const [newComment, setNewComment] = useState({
         postId: parseInt(id),
         userProfileId: 1,
         subject: "",
         content: ""
     })
-
 
     const handleFieldChange = (e) => {
         const stateToChange = { ...newComment };
@@ -64,12 +61,14 @@ const AddComment = () => {
                     />
                 </FormGroup>
             </Form >
-            <Button block className="submitComment" type="button" color="secondary" isLoading={isLoading} onClick={addNewComment}>
+            <Button block className="submitComment" type="button" color="success" 
+            isLoading={isLoading} onClick={addNewComment}>
                 {'Save Comment'}
             </Button>
+            <Button block className="goBack" type="button" color="danger" 
+            isLoading={isLoading}  onClick={() => history.goBack()}>
+                {'Cancel'}</Button>
         </>
     )
-
 };
-
 export default AddComment;
