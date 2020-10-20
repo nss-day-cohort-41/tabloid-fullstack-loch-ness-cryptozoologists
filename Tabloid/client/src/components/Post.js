@@ -7,7 +7,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 const Post = ({ post }) => {
 
     const { posts, getAllPosts } = useContext(PostContext);
-    const { getAllUsers, getUserById } = useContext(UserProfileContext);
+    const { userProfiles, listAllUserProfiles } = useContext(UserProfileContext);
 
     useEffect(() => {
         getAllPosts();

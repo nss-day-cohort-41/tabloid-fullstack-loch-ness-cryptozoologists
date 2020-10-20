@@ -53,7 +53,8 @@ export const PostProvider = (props) => {
             }).then(resp => resp.json()))
 
     const updatePost = (post) => {
-        return getToken().then((token) => fetch(`/api/post/edit/${post}`, {
+        getToken().then((token) =>
+            fetch(apiUrl + `${post.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -61,7 +62,7 @@ export const PostProvider = (props) => {
                 },
                 body: JSON.stringify(post)
             })
-            )
+        )
     };
 
     const addPost = (post) =>

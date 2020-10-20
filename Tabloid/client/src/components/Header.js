@@ -9,56 +9,52 @@ export default function Header() {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
+    <div>
+      <Navbar color="dark" dark expand="md">
 
-    <Navbar color="dark" dark expand="md">
+        <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
 
-      <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
 
-      <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
 
-      <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
 
-        <Nav className="mr-auto" navbar>
-          {isLoggedIn &&
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
-            </NavItem>
-          }
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
+              </NavItem>
+            }
 
-          {isLoggedIn &&
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
-            </NavItem>
-          }
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
+              </NavItem>
+            }
 
-          {isLoggedIn &&
-            <>
-              <NavItem>cd tab
+            {isLoggedIn &&
+              <NavItem>
                 <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
               </NavItem>
-            </>
-          }
+            }
 
-          {isLoggedIn &&
-            <>
-              <NavItem>
+            {isLoggedIn &&
+              <NavItem className="pull-right">
                 <NavLink tag={RRNavLink} onClick={logout} to="/login">Logout</NavLink>
               </NavItem>
-            </>
-          }
+            }
 
-        </Nav>
+            {!isLoggedIn &&
+              <NavItem className="ml-auto pull-right">
+                <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+                <NavLink tag={RRNavLink} to="/register" className="ml-2">Register</NavLink>
+              </NavItem>
+            }
 
-        {!isLoggedIn &&
-          <NavItem className="float-right">
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </NavItem>
-        }
+          </Nav>
+        </Collapse>
 
-      </Collapse>
-
-    </Navbar>
-
+      </Navbar>
+    </div>
   );
 }
