@@ -39,7 +39,7 @@ export default function PostEditForm() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    //setIsLoading(true);
 
     updatePost({
         id: post.id,
@@ -118,7 +118,7 @@ export default function PostEditForm() {
         </FormGroup>
 
         {/* PUBLISH DATE ~~~~~~~~~~ */}
-        {/* <FormGroup>
+        <FormGroup>
           <Label for="content">Publish Date</Label>
           <Input
               type="datetime-local"
@@ -128,15 +128,18 @@ export default function PostEditForm() {
               name="publishDateTime"
               onChange={handleFieldChange}
           />
-      </FormGroup> */}
+      </FormGroup>
 
         {/* SUBMIT */}
         <FormGroup className="mt-5">
+
           <Button color="info" >Submit</Button>
+
           <Button color="secondary" className="ml-4"
               onClick={() => { history.push(`/post`) }}>
-              Cancel
+            Cancel
           </Button>
+
         </FormGroup>
       </Form>
     </>
