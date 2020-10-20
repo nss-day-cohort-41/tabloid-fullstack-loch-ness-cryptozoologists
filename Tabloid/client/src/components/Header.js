@@ -10,48 +10,55 @@ export default function Header() {
 
   return (
 
-      <Navbar color="dark" dark expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+    <Navbar color="dark" dark expand="md">
 
-          <Nav className="mr-auto" navbar>
-            {isLoggedIn &&
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
+      <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
+
+      <NavbarToggler onClick={toggle} />
+
+      <Collapse isOpen={isOpen} navbar>
+
+        <Nav className="mr-auto" navbar>
+          {isLoggedIn &&
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
+            </NavItem>
+          }
+
+          {isLoggedIn &&
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
+            </NavItem>
+          }
+
+          {isLoggedIn &&
+            <>
+              <NavItem>cd tab
+                <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
               </NavItem>
-            }
+            </>
+          }
 
-            {isLoggedIn &&
+          {isLoggedIn &&
+            <>
               <NavItem>
-                <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
+                <NavLink tag={RRNavLink} onClick={logout} to="/login">Logout</NavLink>
               </NavItem>
-            }
+            </>
+          }
 
-            {isLoggedIn &&
-              <>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
-                </NavItem>
+        </Nav>
 
-                <NavItem>
-                  <NavLink tag={RRNavLink} onClick={logout} to="/login">Logout</NavLink>
-                </NavItem>
+        {!isLoggedIn &&
+          <NavItem className="float-right">
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </NavItem>
+        }
 
-              </>
-            }
+      </Collapse>
 
-            {!isLoggedIn &&
-              <NavbarText>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
-              </NavbarText>
-            }
-
-          </Nav>
-        </Collapse>
-      </Navbar>
-
+    </Navbar>
 
   );
 }
