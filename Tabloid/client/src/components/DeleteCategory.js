@@ -15,7 +15,7 @@ const DeleteCategory = () => {
 
     const handleDelete = (evt) => {
         evt.preventDefault();
-        deleteCategory(categoryText)
+        deleteCategory(id)
             .then(() => history.push("/category"))
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     }
@@ -34,7 +34,12 @@ const DeleteCategory = () => {
         <>
             <div>
 
+                <h3>Are you sure you want to delete this category? </h3>
 
+
+                <Button type="button" color="secondary" onClick={handleDelete}>
+                    Delete
+                </Button>
 
                 <Button type="button" id={category.id} color="secondary" onClick={() => history.goBack()}>
                     {'Cancel'}
