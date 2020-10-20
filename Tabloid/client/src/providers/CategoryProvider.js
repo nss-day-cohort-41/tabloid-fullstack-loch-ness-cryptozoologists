@@ -31,8 +31,20 @@ export function CategoryProvider(props) {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json())
-                .then(setCategory));
+            }).then(resp => resp.json()));
+
+    const getCategoryById = (categoryId) => {
+        getToken().then((token) => {
+            fetch(`/api/category/${categoryId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `bearer ${token}`
+                }
+            }).then(resp => resp.json()).then(setCategory)
+        })
+    }
+
+
 
 
     const addCategory = (category) =>
@@ -74,7 +86,7 @@ export function CategoryProvider(props) {
             }).then(getAllCategories));
 
     return (
-        <CategoryContext.Provider value={{ category, categories, getAllCategories, getSingleCategory, addCategory, editCategory, deleteCategory }}>
+        <CategoryContext.Provider value={{ category, categories, getAllCategories, getSingleCategory, getCategoryById, addCategory, editCategory, deleteCategory }}>
             {props.children}
         </CategoryContext.Provider>
     );

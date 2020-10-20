@@ -12,6 +12,8 @@ import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
 import TagList from "./TagList";
 import EditTagForm from "./EditTagForm";
+import DeleteCategory from "./DeleteCategory";
+
 import CommentList from "../components/Comment/CommentList";
 import AddComment from "../components/Comment/AddCommentForm";
 import DeleteComment from "../components/Comment/DeleteComment";
@@ -69,6 +71,11 @@ export default function ApplicationViews() {
           <CategoryEditForm />
         </Route>
 
+        <Route path="/categories/delete/:id" exact>
+          <DeleteCategory />
+        </Route>
+
+        {/* <Route path="/comments/:id"> */}
         <Route path="/commentsbypost/:id" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
@@ -79,7 +86,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <DeleteComment /> : <Redirect to="/login" />}
         </Route>
         <Route path="/comments/edit/:id" exact>
-           <EditComment />
+          <EditComment />
         </Route>
         <Route path="/userprofile">
           <UserProfileList />

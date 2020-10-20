@@ -72,7 +72,7 @@ namespace Tabloid.Repositories
                 }
             }
         }
-
+      
         public void AddCategory(Category category)
         {
             using (var conn = Connection)
