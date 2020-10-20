@@ -6,15 +6,22 @@ import Register from "./Register";
 import Hello from "./Hello";
 import CategoryList from "./CategoryList";
 import PostList from "./PostList";
-import CommentList from "./CommentList";
 import PostDetails from "./PostDetails";
 import CategoryAddForm from "./CategoryAddForm";
 import CategoryEditForm from "./CategoryEditForm";
 import AddTagForm from "./AddTagForm";
 import TagList from "./TagList";
 import EditTagForm from "./EditTagForm";
+<<<<<<< HEAD
 import DeleteCategory from "./DeleteCategory";
 
+=======
+import CommentList from "../components/Comment/CommentList";
+import AddComment from "../components/Comment/AddCommentForm";
+import DeleteComment from "../components/Comment/DeleteComment";
+import EditComment from "../components/Comment/EditCommentForm";
+import UserProfileList from "./UserProfileList";
+>>>>>>> master
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -67,15 +74,31 @@ export default function ApplicationViews() {
           <CategoryEditForm />
         </Route>
 
+<<<<<<< HEAD
         <Route path="/categories/delete/:id" exact>
           <DeleteCategory />
         </Route>
 
         <Route path="/comments/:id">
-
-          <CommentList />
-
+=======
+        <Route path="/commentsbypost/:id" exact>
+          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
+        <Route path="/comments/add/:id" exact>
+          {isLoggedIn ? <AddComment /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/comments/delete/:id" exact>
+          {isLoggedIn ? <DeleteComment /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/comments/edit/:id" exact>
+           <EditComment />
+        </Route>
+        <Route path="/userprofile">
+          <UserProfileList />
+        </Route>
+>>>>>>> master
+
+
 
       </Switch>
     </main >
