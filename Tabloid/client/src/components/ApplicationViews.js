@@ -68,7 +68,8 @@ export default function ApplicationViews() {
         <Route path="/categories/edit/:id" exact>
           <CategoryEditForm />
         </Route>
-
+        
+        {/* Comments */}
         <Route path="/commentsbypost/:id" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
@@ -81,12 +82,10 @@ export default function ApplicationViews() {
         <Route path="/comments/edit/:id" exact>
            <EditComment />
         </Route>
+        {/* End Comments */}
         <Route path="/userprofile">
           <UserProfileList />
         </Route>
-
-
-
       </Switch>
     </main >
   );
