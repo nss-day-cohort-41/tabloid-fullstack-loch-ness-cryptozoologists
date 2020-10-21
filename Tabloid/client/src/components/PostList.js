@@ -14,10 +14,11 @@ const PostList = () => {
 
     return (
         <Container>
-            <h1>Posts</h1>
-            <Link to={`/post/add`}>
-                <span className="dh-addTag">&#x2b;</span>
-            </Link>
+            <div className="d-flex">
+                <h1>Posts</h1>
+                <span Link to={`/post/add`} className="dh-addTag">&#x2b;</span>
+            </div>
+
             <Row className="justify-content-center">
                 <div className="dh-grid">
                     {posts.map((post) => (
